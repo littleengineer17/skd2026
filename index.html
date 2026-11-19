@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diagnostik SKD CPNS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: satu kolom kerja. Warna per subtes: TWK teal, TIU ungu, TKP jingga. Huruf dasar 18px, bisa 3 ukuran. */
+:root{
+  --fs:18px;
+  --bg:#f3f6f8; --card:#ffffff; --ink:#14202b; --muted:#566676; --line:#d9e1e7;
+  --accent:#0b6e74; --accent-ink:#ffffff; --accent-soft:#dff1f2;
+  --good:#17753f; --good-soft:#dcf3e5; --warn:#8f5200; --warn-soft:#fdf0d4; --bad:#b3261e; --bad-soft:#fde4e1;
+  --c-twk:#0b6e74; --c-twk-soft:#dcf1f2; --c-tiu:#5844c4; --c-tiu-soft:#e9e5fc; --c-tkp:#b8500a; --c-tkp-soft:#fdebd8;
+  --font:'Manrope',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif; --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0e151b; --card:#17212a; --ink:#e9eff4; --muted:#a3b3c0; --line:#2b3a47;
+  --accent:#4fc3c9; --accent-ink:#06282b; --accent-soft:#12343a;
+  --good:#5fd596; --good-soft:#133524; --warn:#f2b552; --warn-soft:#3a2c0e; --bad:#ff8f86; --bad-soft:#3d1a18;
+  --c-twk:#4fc3c9; --c-twk-soft:#12343a; --c-tiu:#aa9dff; --c-tiu-soft:#272250; --c-tkp:#ffa862; --c-tkp-soft:#3d2a16; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#0e151b; --card:#17212a; --ink:#e9eff4; --muted:#a3b3c0; --line:#2b3a47;
+  --accent:#4fc3c9; --accent-ink:#06282b; --accent-soft:#12343a;
+  --good:#5fd596; --good-soft:#133524; --warn:#f2b552; --warn-soft:#3a2c0e; --bad:#ff8f86; --bad-soft:#3d1a18;
+  --c-twk:#4fc3c9; --c-twk-soft:#12343a; --c-tiu:#aa9dff; --c-tiu-soft:#272250; --c-tkp:#ffa862; --c-tkp-soft:#3d2a16; color-scheme:dark;}
+.s-TWK{--sc:var(--c-twk);--ss:var(--c-twk-soft)} .s-TIU{--sc:var(--c-tiu);--ss:var(--c-tiu-soft)} .s-TKP{--sc:var(--c-tkp);--ss:var(--c-tkp-soft)}
+
+*{box-sizing:border-box}
+html{font-size:var(--fs)}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:1rem;line-height:1.65;-webkit-text-size-adjust:100%}
+h1,h2,h3,h4{text-wrap:balance;line-height:1.25;margin:0}
+h1{font-size:1.75rem;font-weight:800} h2{font-size:1.3rem;font-weight:800} h3{font-size:1.08rem;font-weight:700} h4{font-size:1rem;font-weight:800}
+p{margin:0}
+.wrap{max-width:800px;margin:0 auto;padding:18px 16px}
+.stack{display:flex;flex-direction:column;gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+.muted{color:var(--muted)} .small{font-size:.92rem}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.between{justify-content:space-between}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media (max-width:620px){.grid3{grid-template-columns:1fr}}
+button{font:inherit;cursor:pointer}
+.btn{border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:10px 18px;min-height:46px;font-weight:700}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.danger{color:var(--bad)}
+.btn:focus-visible,.opt:focus-within,.nav button:focus-visible,input:focus-visible,summary:focus-visible,.fsb:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+.tag{display:inline-block;font-size:.82rem;font-weight:800;letter-spacing:.04em;padding:3px 11px;border-radius:99px;background:var(--ss,var(--accent-soft));color:var(--sc,var(--accent))}
+.pill{display:inline-block;font-size:.84rem;font-weight:800;padding:3px 12px;border-radius:99px;white-space:nowrap}
+.pill.ok{background:var(--good-soft);color:var(--good)} .pill.near{background:var(--warn-soft);color:var(--warn)} .pill.low{background:var(--bad-soft);color:var(--bad)}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);font-size:.95rem;vertical-align:middle}
+th{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:800}
+.scroll-x{overflow-x:auto}
+.hide{display:none!important}
+
+/* kontrol ukuran huruf */
+.fsw{display:inline-flex;border:2px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card)}
+.fsb{border:0;background:transparent;color:var(--ink);font-weight:800;padding:6px 12px;min-height:42px}
+.fsb.on{background:var(--accent);color:var(--accent-ink)}
+.fsb:nth-child(1){font-size:.9rem}.fsb:nth-child(2){font-size:1.1rem}.fsb:nth-child(3){font-size:1.3rem}
+
+/* tes */
+.topbar{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:10px;padding-bottom:10px}
+.timer{font-family:var(--mono);font-weight:600;font-size:1.7rem;font-variant-numeric:tabular-nums;padding:2px 14px;border-radius:12px;background:var(--card);border:2px solid var(--line)}
+.timer.warn{color:var(--warn);border-color:var(--warn)} .timer.crit{color:var(--bad);border-color:var(--bad)}
+.bar{height:8px;background:var(--line);border-radius:9px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent);width:0}
+.qcard{border-left:8px solid var(--sc)}
+.qtext{font-size:1.2rem;line-height:1.7;white-space:pre-line}
+.opts{display:flex;flex-direction:column;gap:12px;margin:18px 0 0;padding:0;border:0;min-width:0}
+.opt{display:flex;gap:14px;align-items:flex-start;border:2px solid var(--line);border-radius:14px;padding:15px 16px;cursor:pointer;background:var(--card);font-size:1.12rem;line-height:1.55}
+.opt:hover{border-color:var(--sc)}
+.opt.sel{border-color:var(--sc);background:var(--ss)}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.bub{flex:0 0 auto;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:800;background:var(--line);color:var(--ink)}
+.opt.sel .bub{background:var(--sc);color:var(--card)}
+.nav{display:grid;grid-template-columns:repeat(auto-fill,minmax(48px,1fr));gap:8px}
+.nav button{height:48px;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--ink);font-weight:800;font-size:1rem;font-variant-numeric:tabular-nums;position:relative}
+.nav button.done{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.nav button.cur{outline:3px solid var(--ink);outline-offset:1px}
+.nav button.flag::after{content:"";position:absolute;top:4px;right:4px;width:10px;height:10px;border-radius:50%;background:var(--warn)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.9rem;color:var(--muted)}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:4px;margin-right:6px;vertical-align:-2px;border:2px solid var(--line)}
+
+/* hasil */
+.big{font-size:2.2rem;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1}
+.scorebox{border:1px solid var(--line);border-top:6px solid var(--sc);border-radius:16px;padding:16px;background:var(--card);display:flex;flex-direction:column;gap:8px}
+.meter{position:relative;height:12px;border-radius:9px;background:var(--line)}
+.meter>i{position:absolute;left:0;top:0;height:100%;border-radius:9px;background:var(--sc)}
+.meter>u{position:absolute;top:-5px;width:3px;height:22px;background:var(--ink);border-radius:2px;text-decoration:none}
+.sec-h{display:flex;align-items:center;gap:12px}
+.letter{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-weight:800;font-size:1.2rem;background:var(--accent);color:var(--accent-ink);flex:0 0 auto}
+.bedah{border:1px solid var(--line);border-left:8px solid var(--sc);border-radius:14px;padding:16px;background:var(--card);display:flex;flex-direction:column;gap:10px}
+ul.dots{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+ul.dots li{position:relative;padding-left:22px}
+ul.dots li::before{content:"";position:absolute;left:2px;top:.62em;width:9px;height:9px;border-radius:50%;background:var(--sc,var(--accent))}
+ol.steps{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;counter-reset:st}
+ol.steps li{position:relative;padding-left:40px;counter-increment:st}
+ol.steps li::before{content:counter(st);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-weight:800;font-size:.9rem}
+.blk{border-radius:14px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start}
+.blk>svg{flex:0 0 auto;width:26px;height:26px;margin-top:1px}
+.blk>div{min-width:0;flex:1}
+.blk h4{margin-bottom:6px}
+.blk.core{background:var(--ss);color:var(--ink)} .blk.core svg{stroke:var(--sc)}
+.blk.kon{border:2px solid var(--line);background:var(--card)} .blk.kon svg{stroke:var(--sc)}
+.blk.fast{background:var(--accent-soft)} .blk.fast svg{stroke:var(--accent)}
+.blk.trap{background:var(--warn-soft)} .blk.trap svg{stroke:var(--warn)}
+.blk.mn{border:2px dashed var(--sc);background:var(--card)} .blk.mn svg{stroke:var(--sc)}
+svg.ic{fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* accordion pembahasan */
+details.rv{border:1px solid var(--line);border-left:8px solid var(--sc);border-radius:16px;background:var(--card);overflow:hidden}
+details.rv>summary{list-style:none;display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer}
+details.rv>summary::-webkit-details-marker{display:none}
+.num{flex:0 0 auto;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-weight:800;background:var(--ss);color:var(--sc);font-size:1.05rem}
+.sumtxt{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.35}
+.sumtxt b{font-size:1rem} .sumtxt span{font-size:.88rem;color:var(--muted)}
+.chev{flex:0 0 auto;width:12px;height:12px;border-right:3px solid var(--muted);border-bottom:3px solid var(--muted);transform:rotate(45deg);transition:transform .2s;margin:0 6px 4px 0}
+details[open]>summary .chev{transform:rotate(225deg);margin-bottom:-4px}
+.rvbody{padding:4px 16px 18px;display:flex;flex-direction:column;gap:14px}
+.rvbody .qtext{font-size:1.08rem}
+.orow{display:flex;gap:12px;padding:12px 14px;border-radius:14px;border:2px solid var(--line);background:var(--card)}
+.orow .lt{flex:0 0 auto;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:800;background:var(--line)}
+.orow .ot{font-weight:600;line-height:1.5}
+.orow .rs{font-size:.96rem;color:var(--muted);margin-top:4px;line-height:1.55}
+.orow .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.orow.key{border-color:var(--good);background:var(--good-soft)} .orow.key .lt{background:var(--good);color:var(--card)} .orow.key .rs{color:var(--ink)}
+.orow.s4{border-color:var(--accent);background:var(--accent-soft)} .orow.s4 .lt{background:var(--accent);color:var(--accent-ink)}
+.orow.low{background:var(--card)}
+.orow.you{box-shadow:0 0 0 3px var(--bad)}
+.orow.you.key{box-shadow:0 0 0 3px var(--good)}
+.bdg{font-size:.8rem;font-weight:800;padding:2px 10px;border-radius:99px;background:var(--line);color:var(--ink)}
+.bdg.g{background:var(--good);color:var(--card)} .bdg.b{background:var(--bad);color:var(--card)} .bdg.a{background:var(--accent);color:var(--accent-ink)}
+.vd{flex:0 0 auto;font-size:.82rem;font-weight:800;padding:4px 11px;border-radius:99px}
+.vd.ok{background:var(--good-soft);color:var(--good)} .vd.bad{background:var(--bad-soft);color:var(--bad)} .vd.part{background:var(--warn-soft);color:var(--warn)}
+textarea{width:100%;min-height:160px;font-family:var(--mono);font-size:.88rem;line-height:1.55;border:2px solid var(--line);border-radius:12px;padding:12px;background:var(--bg);color:var(--ink)}
+input[type=text],input[type=number]{font:inherit;border:2px solid var(--line);border-radius:12px;padding:10px 12px;min-height:46px;background:var(--bg);color:var(--ink);width:100%}
+label{font-size:.88rem;font-weight:800;color:var(--muted);display:flex;flex-direction:column;gap:5px}
+.modal{position:fixed;inset:0;background:rgba(5,12,18,.62);display:flex;align-items:center;justify-content:center;padding:16px;z-index:20}
+.modal .card{max-width:440px;width:100%}
+.hero{border-radius:20px;padding:22px;background:linear-gradient(135deg,var(--accent-soft),var(--card));border:1px solid var(--line)}
+.step3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media (max-width:620px){.step3{grid-template-columns:1fr}}
+.pg td:first-child{font-weight:800}
+@media (prefers-reduced-motion:no-preference){.bar>i,.meter>i{transition:width .4s ease}}
+@media (prefers-reduced-motion:reduce){.chev{transition:none}}
+</style>
+</head>
+<body>
+
+<div id="app"></div>
+
+<script>
+/* ===== DATA: 25 soal orisinal =====
+   TWK/TIU: k = kunci huruf. TKP: s = skor tiap opsi 1..5.
+   Pembahasan: core (yang ditanya), kon (konsep), opt (alasan tiap opsi), fast (cara cepat), mn (jembatan keledai), trap (jebakan). */
+var Q = [
+/* ---------- TWK (8) ---------- */
+{sub:"TWK",topic:"Pilar negara: UUD 1945",
+ q:"Sebuah Peraturan Pemerintah digugat karena dianggap bertentangan dengan undang-undang. Pada saat yang sama, sebuah undang-undang digugat karena dianggap bertentangan dengan UUD 1945. Lembaga yang berwenang menguji masing-masing perkara tersebut adalah ....",
+ o:["PP diuji oleh Mahkamah Konstitusi; UU diuji oleh Mahkamah Agung","Keduanya diuji oleh Mahkamah Konstitusi","PP diuji oleh Mahkamah Agung; UU diuji oleh Mahkamah Konstitusi","Keduanya diuji oleh Mahkamah Agung","PP diuji oleh DPR; UU diuji oleh Mahkamah Konstitusi"],
+ k:"C",
+ core:"Yang ditanya: lembaga mana yang menguji dua peraturan yang tingkatnya berbeda.",
+ kon:["Hierarki peraturan: UUD 1945 di puncak, lalu undang-undang, lalu Peraturan Pemerintah dan peraturan di bawahnya.","Pengujian selalu mempertemukan dua tingkat: peraturan yang digugat diuji terhadap peraturan di atasnya.","PP diuji terhadap UU oleh Mahkamah Agung (Pasal 24A ayat 1). UU diuji terhadap UUD oleh Mahkamah Konstitusi (Pasal 24C ayat 1)."],
+ opt:["Terbalik. MK tidak menguji PP, dan MA tidak menguji UU terhadap UUD.","MK hanya berwenang menguji UU terhadap UUD, jadi tidak bisa menguji PP.","Benar. PP (di bawah UU) diuji MA, UU terhadap UUD diuji MK.","MA tidak berwenang menguji UU terhadap UUD.","DPR membentuk undang-undang. DPR bukan lembaga yudisial yang menguji PP."],
+ fast:["Gambar tangga peraturan: UUD, UU, PP.","Lihat peraturan yang digugat dan 'terhadap apa' ia diuji.","Terhadap UUD berarti MK. Terhadap UU (peraturan di bawahnya) berarti MA."],
+ mn:"MK = UU diadu dengan UUD. MA = peraturan di bawah UU diadu dengan UU.",
+ trap:"Pengecoh membalik pasangan lembaga atau memasukkan DPR. Periksa pasangannya, bukan hanya nama lembaganya."},
+{sub:"TWK",topic:"Pilar negara: Pancasila",
+ q:"Kepala desa memutuskan sendiri lokasi pembangunan balai warga tanpa musyawarah. Hasilnya ternyata menguntungkan seluruh warga dan keputusan itu dinilai adil. Meski begitu, cara pengambilan keputusannya paling bertentangan dengan pengamalan sila ke ....",
+ o:["4","2","3","5","1"],
+ k:"A",
+ core:"Yang ditanya: CARA mengambil keputusan, bukan hasilnya.",
+ kon:["Sila ke-4 menekankan proses: musyawarah, hikmat kebijaksanaan, dan perwakilan.","Keputusan sepihak tanpa musyawarah melanggar prosesnya, sebaik apa pun hasilnya.","Sila ke-5 (keadilan sosial) bicara tentang hasil yang merata. Itu bukan yang ditanyakan di sini."],
+ opt:["Benar. Sila 4: kerakyatan yang dipimpin hikmat kebijaksanaan dalam permusyawaratan atau perwakilan.","Sila 2 soal kemanusiaan dan perlakuan beradab. Kasus ini tidak menyangkut martabat manusia.","Sila 3 soal persatuan. Keputusan sepihak tidak otomatis memecah persatuan.","Sila 5 soal keadilan hasil. Ini jebakan karena soal sengaja menyebut hasil yang menguntungkan semua.","Sila 1 soal ketuhanan dan toleransi beragama. Tidak ada unsur itu di kasus ini."],
+ fast:["Garis bawahi 'tanpa musyawarah' dan 'cara pengambilan keputusannya'.","Kata kunci musyawarah atau perwakilan langsung mengarah ke sila 4.","Abaikan informasi pemanis seperti 'hasilnya menguntungkan'."],
+ mn:"Sila 4 = bangku melingkar: semua boleh bersuara sebelum diputuskan.",
+ trap:"Soal sengaja menaruh hasil yang bagus untuk memancing kamu memilih sila 5."},
+{sub:"TWK",topic:"Integritas",
+ q:"Seorang ASN pengelola pengadaan menerima kiriman parsel bernilai tinggi dari rekanan menjelang hari raya, setelah kontrak selesai. Rekanan mengatakan itu hanya tanda terima kasih. Tindakan yang paling tepat sesuai ketentuan gratifikasi adalah ....",
+ o:["Menerima karena kontrak sudah selesai dan tidak ada permintaan apa pun","Membagikan parsel kepada rekan sekantor agar tidak dianggap memperkaya diri","Mengembalikan parsel secara diam-diam tanpa melapor kepada siapa pun","Melaporkan penerimaan kepada KPK, langsung atau melalui unit pengendali gratifikasi instansi, paling lambat 30 hari kerja sejak diterima","Menyimpan parsel sambil menunggu atasan menentukan sikap"],
+ k:"D",
+ core:"Yang ditanya: langkah paling tepat atas pemberian yang berkaitan dengan jabatan.",
+ kon:["Gratifikasi adalah pemberian dalam arti luas kepada pegawai negeri atau penyelenggara negara. Yang berhubungan dengan jabatan wajib dilaporkan.","Aturannya: lapor ke KPK paling lambat 30 hari kerja sejak diterima, langsung atau lewat unit pengendali gratifikasi instansi.","Nilai integritas yang diuji: jujur dan transparan. Alasan 'kontrak sudah selesai' atau 'hanya terima kasih' tidak menghapus kewajiban lapor."],
+ opt:["Menerima tanpa lapor menyalahi kewajiban. Kontrak yang sudah selesai tidak mengubah aturan.","Membagikan ke rekan tetap berarti menerima tanpa melapor, dan menyeret orang lain.","Niatnya baik, tetapi dilakukan diam-diam: tidak transparan dan tidak ada jejak resmi.","Benar. Jalur resmi dan ada batas waktu yang jelas.","Menunda tanpa jalur resmi. Batas 30 hari kerja tetap berjalan selama kamu menunggu."],
+ fast:["Soal integritas: cari opsi yang transparan dan lewat jalur resmi.","Coret opsi bertanda 'diam-diam', 'menunggu', atau 'membagikan'.","Hafal angkanya: 30 hari kerja."],
+ mn:"Terima? Lapor! Tiga puluh hari kerja, jangan sampai lewat.",
+ trap:"Alasan manis di soal ('kontrak sudah selesai', 'tanda terima kasih') dibuat untuk membenarkan penerimaan."},
+{sub:"TWK",topic:"Nasionalisme: sejarah",
+ q:"Urutkan peristiwa berikut secara kronologis.\n(1) Dekrit Presiden kembali ke UUD 1945\n(2) Kongres Pemuda II dan Sumpah Pemuda\n(3) Berdirinya Budi Utomo\n(4) Penetapan UUD 1945 oleh PPKI",
+ o:["2 - 3 - 4 - 1","3 - 2 - 4 - 1","3 - 2 - 1 - 4","3 - 4 - 2 - 1","2 - 3 - 1 - 4"],
+ k:"B",
+ core:"Yang ditanya: urutan waktu empat peristiwa. Soal tidak memberi tahun, jadi kamu harus mengingatnya.",
+ kon:["Budi Utomo (1908): awal pergerakan nasional modern.","Sumpah Pemuda (1928): ikrar persatuan para pemuda dari berbagai daerah.","PPKI menetapkan UUD 1945 pada 18 Agustus 1945, sehari setelah proklamasi.","Dekrit Presiden 5 Juli 1959: kembali ke UUD 1945."],
+ opt:["Sumpah Pemuda (1928) tidak mungkin mendahului Budi Utomo (1908).","Benar: 1908, 1928, 1945, 1959.","Dekrit 1959 tidak mungkin sebelum penetapan UUD 1945 (1945).","Penetapan UUD (1945) tidak mungkin mendahului Sumpah Pemuda (1928).","Dua kesalahan sekaligus: Budi Utomo setelah Sumpah Pemuda dan Dekrit sebelum UUD."],
+ fast:["Ubah tiap peristiwa jadi tahun: 1959, 1928, 1908, 1945.","Urutkan angkanya: 1908, 1928, 1945, 1959.","Cocokkan urutan itu dengan nomor peristiwa di opsi."],
+ mn:"Empat tonggak: 08, 28, 45, 59. Selisihnya 20, 17, 14: makin merapat menuju merdeka.",
+ trap:"Opsi disusun dari angka yang mirip. Jangan menebak dari kesan; ubah ke tahun dulu."},
+{sub:"TWK",topic:"Bela negara",
+ q:"Frasa 'upaya pembelaan negara' sebagai hak dan kewajiban setiap warga negara terdapat dalam ....",
+ o:["Pasal 30 ayat (1) UUD 1945","Pasal 28J ayat (1) UUD 1945","Pasal 31 ayat (1) UUD 1945","Pasal 33 ayat (1) UUD 1945","Pasal 27 ayat (3) UUD 1945"],
+ k:"E",
+ core:"Yang ditanya: pasal yang memuat frasa persis 'upaya pembelaan negara'.",
+ kon:["Pasal 27 ayat (3): setiap warga negara berhak dan wajib ikut serta dalam upaya pembelaan negara.","Pasal 30 ayat (1): berhak dan wajib ikut serta dalam usaha pertahanan dan keamanan negara. Mirip, tetapi frasanya berbeda.","Pasal 28J (menghormati hak asasi orang lain), 31 (pendidikan), dan 33 (perekonomian) tidak membahas bela negara."],
+ opt:["Pasal 30 ayat (1) memakai frasa 'usaha pertahanan dan keamanan negara'. Ini pengecoh terdekat.","Pasal 28J ayat (1): kewajiban menghormati hak asasi manusia orang lain.","Pasal 31 ayat (1): hak setiap warga atas pendidikan.","Pasal 33 ayat (1): perekonomian disusun sebagai usaha bersama.","Benar. Pasal 27 ayat (3) memuat 'upaya pembelaan negara'."],
+ fast:["Cocokkan frasa persis di soal dengan isi pasal.","Pembelaan negara = Pasal 27 ayat (3). Pertahanan dan keamanan = Pasal 30.","Jika ragu antara 27 dan 30, lihat kata kerjanya: 'upaya pembelaan' atau 'usaha pertahanan'."],
+ mn:"27 = bela negara. 30 = hankam. Satu per satu, jangan tertukar.",
+ trap:"Pasal 30 ayat (1) hampir sama tetapi bukan jawabannya. Perhatikan frasa, bukan hanya temanya."},
+{sub:"TWK",topic:"Bahasa Indonesia: kalimat efektif",
+ q:"Kalimat yang tidak efektif karena memakai penanda jamak secara berlebihan adalah ....",
+ o:["Seluruh peserta diwajibkan membawa kartu ujian masing-masing.","Banyak para peserta belum mengumpulkan berkas pendaftaran.","Panitia mengumumkan hasil seleksi administrasi kemarin.","Pegawai itu dipromosikan karena kinerjanya yang konsisten.","Kami akan segera menindaklanjuti laporan tersebut."],
+ k:"B",
+ core:"Yang ditanya: kalimat yang boros karena penanda jamaknya ganda.",
+ kon:["Kalimat efektif itu hemat kata, jelas, dan tidak berulang makna.","'Banyak' sudah menyatakan jumlah lebih dari satu. 'Para' juga penanda jamak. Dipakai bersama, keduanya mubazir.","Perbaikan: 'Banyak peserta belum mengumpulkan berkas' atau 'Para peserta belum mengumpulkan berkas'."],
+ opt:["Efektif. 'Masing-masing' menjelaskan tiap peserta membawa kartunya sendiri.","Benar. 'Banyak' dan 'para' sama-sama jamak, jadi berlebihan.","Efektif. Susunannya jelas dan tidak ada kata berlebih.","Efektif. 'Yang' menyambung keterangan kinerja dengan wajar.","Efektif. Subjek, predikat, dan objeknya lengkap."],
+ fast:["Cari penanda jamak: banyak, para, beberapa, seluruh, kata ulang.","Dua penanda jamak dalam satu frasa berarti curiga.","Cek juga pleonasme lain: naik ke atas, mundur ke belakang."],
+ mn:"Satu penanda jamak cukup. Dua penanda berarti boros.",
+ trap:"Opsi lain terdengar formal sehingga terasa benar. Fokus pada kata yang ganda, bukan pada nada kalimat."},
+{sub:"TWK",topic:"Pilar negara: Bhinneka Tunggal Ika",
+ q:"Pernyataan yang benar tentang semboyan Bhinneka Tunggal Ika adalah ....",
+ o:["Dikutip dari Kakawin Sutasoma karya Mpu Tantular dan tercantum dalam Pasal 36A UUD 1945","Dikutip dari Negarakertagama karya Mpu Prapanca dan tercantum dalam Pasal 36A UUD 1945","Dikutip dari Kakawin Sutasoma karya Mpu Tantular dan tercantum dalam Pasal 36B UUD 1945","Dikutip dari Pararaton dan tercantum dalam Pasal 35 UUD 1945","Dikutip dari Kakawin Sutasoma karya Mpu Prapanca dan tercantum dalam Pasal 36A UUD 1945"],
+ k:"A",
+ core:"Yang ditanya: pernyataan yang benar pada TIGA detail sekaligus: kitab, penulis, dan pasal.",
+ kon:["Semboyan berasal dari Kakawin Sutasoma karya Mpu Tantular (zaman Majapahit).","Dasar konstitusi: Pasal 36A UUD 1945, yaitu Lambang Negara Garuda Pancasila dengan semboyan Bhinneka Tunggal Ika.","Negarakertagama ditulis Mpu Prapanca. Pasal 36B mengatur Lagu Kebangsaan. Pasal 35 mengatur Bendera Negara."],
+ opt:["Benar. Sutasoma, Mpu Tantular, dan Pasal 36A cocok semuanya.","Pasangan kitab dan penulis salah: Negarakertagama adalah karya Mpu Prapanca, bukan sumber semboyan.","Pasal 36B mengatur lagu kebangsaan Indonesia Raya, bukan lambang negara.","Pararaton bukan sumber semboyan, dan Pasal 35 mengatur bendera.","Sutasoma ditulis Mpu Tantular, bukan Mpu Prapanca."],
+ fast:["Tiap opsi salah di tepat satu atau dua detail. Periksa kitab, penulis, pasal satu per satu.","Sutasoma berpasangan dengan Tantular. Negarakertagama berpasangan dengan Prapanca.","Urutan pasal: 35 Bendera, 36 Bahasa, 36A Lambang, 36B Lagu."],
+ mn:"Tantular-Sutasoma (T-S), Prapanca-Negarakertagama (P-N). Pasal 35 sampai 36B: Bendera, Bahasa, Lambang, Lagu.",
+ trap:"Setiap pengecoh benar sebagian. Satu detail yang salah sudah cukup untuk menggugurkan opsi."},
+{sub:"TWK",topic:"NKRI: otonomi daerah",
+ q:"Sebuah pemerintah provinsi berencana mencetak mata uang daerah sebagai alat pembayaran sah di wilayahnya. Rencana tersebut melanggar urusan pemerintahan absolut di bidang ....",
+ o:["Pertahanan","Yustisi","Moneter dan fiskal nasional","Agama","Politik luar negeri"],
+ k:"C",
+ core:"Yang ditanya: bidang urusan absolut yang dilanggar oleh pencetakan mata uang daerah.",
+ kon:["Urusan pemerintahan absolut sepenuhnya menjadi wewenang pemerintah pusat dan tidak diserahkan ke daerah (UU 23/2014).","Enam urusan absolut: politik luar negeri, pertahanan, keamanan, yustisi, moneter dan fiskal nasional, serta agama.","Mata uang dan kebijakan moneter termasuk bidang moneter dan fiskal nasional."],
+ opt:["Pertahanan mengatur angkatan bersenjata dan pertahanan negara, bukan mata uang.","Yustisi mengatur peradilan dan penegakan hukum.","Benar. Mata uang adalah urusan moneter dan fiskal nasional.","Agama adalah urusan keagamaan yang dikelola pusat, tidak terkait uang.","Politik luar negeri mengatur hubungan dengan negara lain."],
+ fast:["Kata kunci: 'mata uang' langsung ke moneter.","Hafalkan enam urusan absolut dengan jari: luar negeri, pertahanan, keamanan, yustisi, moneter-fiskal, agama.","Urusan di luar enam itu disebut urusan konkuren (dibagi pusat dan daerah)."],
+ mn:"Enam jari urusan absolut: Luar negeri, Pertahanan, Keamanan, Yustisi, Moneter-fiskal, Agama.",
+ trap:"Semua opsi memang urusan absolut. Hanya satu yang cocok dengan kasusnya. Cocokkan kasus ke bidang, bukan sekadar mengenali daftar."},
+
+/* ---------- TIU (9) ---------- */
+{sub:"TIU",topic:"Verbal: analogi",
+ q:"BAROMETER : TEKANAN UDARA = ODOMETER : ....",
+ o:["Kecepatan","Bahan bakar","Jarak tempuh","Mesin","Roda"],
+ k:"C",
+ core:"Yang ditanya: pasangan dengan relasi yang sama, yaitu alat ukur dan hal yang diukur.",
+ kon:["Barometer mengukur tekanan udara.","Odometer mengukur jarak tempuh kendaraan.","Speedometer-lah yang mengukur kecepatan, bukan odometer."],
+ opt:["Kecepatan diukur speedometer, bukan odometer. Ini pengecoh.","Bahan bakar diukur indikator bahan bakar.","Benar. Odometer = alat ukur jarak tempuh.","Mesin adalah komponen, bukan hal yang diukur.","Roda adalah komponen, bukan hal yang diukur."],
+ fast:["Ubah jadi kalimat: 'X adalah alat untuk mengukur Y'.","Pakai kalimat yang sama untuk pasangan kedua.","Coret opsi yang berupa benda atau komponen, bukan besaran."],
+ mn:"Barometer: tekanan. Termometer: suhu. Odometer: jarak. Speedometer: kecepatan.",
+ trap:"Kita sering menukar odometer dengan speedometer. Itulah sebabnya 'kecepatan' dipasang sebagai pengecoh."},
+{sub:"TIU",topic:"Verbal: silogisme",
+ q:"Premis 1: Semua peserta yang lolos SKD mengikuti SKB.\nPremis 2: Rani tidak mengikuti SKB.\nKesimpulan yang pasti benar adalah ....",
+ o:["Rani gagal pada SKB","Rani lolos SKD tetapi tidak ikut SKB","Rani mengikuti SKD","Rani tidak lolos SKD","Tidak dapat ditarik kesimpulan"],
+ k:"D",
+ core:"Yang ditanya: kesimpulan yang PASTI benar dari dua premis.",
+ kon:["Premis 1: kalau lolos SKD, pasti ikut SKB.","Premis 2: Rani tidak ikut SKB.","Jika Rani lolos SKD, ia pasti ikut SKB. Karena ia tidak ikut, ia tidak mungkin lolos SKD. Pola ini disebut kontrapositif."],
+ opt:["Tidak ikut SKB berbeda dengan gagal di SKB. Tidak bisa disimpulkan.","Bertentangan dengan Premis 1: yang lolos SKD pasti ikut SKB.","Premis tidak memberi informasi apakah Rani mengikuti SKD.","Benar. Kontrapositif dari Premis 1.","Salah. Kesimpulan bisa ditarik: Rani tidak lolos SKD."],
+ fast:["Gambar lingkaran 'lolos SKD' di dalam lingkaran 'ikut SKB'.","Rani di luar lingkaran besar, berarti juga di luar lingkaran kecil.","Pola: Semua A adalah B; X bukan B, maka X bukan A."],
+ mn:"Kalau hujan, tanah basah. Tanah kering berarti tidak hujan.",
+ trap:"'Tidak dapat ditarik kesimpulan' menggoda karena terkesan aman, padahal di sini kesimpulannya jelas."},
+{sub:"TIU",topic:"Verbal: penalaran teks",
+ q:"Pemerintah Kota X menaikkan tarif parkir dua kali lipat agar pengendara beralih ke angkutan umum. Enam bulan kemudian, jumlah penumpang angkutan umum tidak berubah, sedangkan pendapatan dari parkir meningkat.\nKesimpulan yang paling kuat didukung oleh paragraf tersebut adalah ....",
+ o:["Kebijakan itu gagal total dan merugikan pemerintah kota","Warga berhenti memakai kendaraan pribadi","Angkutan umum tidak dibutuhkan warga","Pendapatan parkir naik karena jumlah kendaraan bertambah","Kebijakan belum mencapai tujuannya, tetapi menambah pendapatan parkir"],
+ k:"E",
+ core:"Yang ditanya: kesimpulan yang paling kuat ditunjang teks, tanpa tambahan klaim.",
+ kon:["Tujuan kebijakan: pengendara beralih ke angkutan umum.","Data 1: penumpang angkutan umum tetap, jadi tujuan belum tercapai.","Data 2: pendapatan parkir naik, jadi ada dampak sampingan yang menguntungkan.","Kesimpulan yang kuat menggabungkan kedua data itu dan tidak menambah klaim baru."],
+ opt:["'Gagal total' dan 'merugikan' melampaui teks. Pendapatan malah naik.","Teks tidak menyebut warga berhenti memakai kendaraan pribadi.","Teks tidak mengatakan angkutan umum tidak dibutuhkan.","Penyebab 'kendaraan bertambah' tidak ada di teks. Itu tebakan.","Benar. Tujuan belum tercapai, tetapi pendapatan parkir naik."],
+ fast:["Tandai tujuan dan data di teks.","Uji tiap opsi: bisa ditunjuk ke kalimat teks atau tidak?","Coret kata mutlak: gagal total, berhenti, tidak dibutuhkan."],
+ mn:"Kesimpulan harus punya 'alamat' di teks. Tidak ada alamat, coret.",
+ trap:"Opsi D terdengar masuk akal, tetapi penyebabnya tidak ada di teks. Jangan memakai pengetahuan di luar teks."},
+{sub:"TIU",topic:"Numerik: persentase",
+ q:"Harga sebuah barang dinaikkan 20%, kemudian diberi diskon 25% dari harga setelah kenaikan. Dibandingkan harga awal, harga akhirnya ....",
+ o:["turun 15%","turun 10%","turun 5%","tetap sama","naik 5%"],
+ k:"B",
+ core:"Yang ditanya: perubahan bersih setelah naik 20% lalu diskon 25%.",
+ kon:["Naik 20% berarti dikali 1,20. Diskon 25% berarti dikali 0,75.","Persen berurutan dikalikan, bukan dijumlahkan: 1,20 x 0,75 = 0,90.","0,90 berarti harga akhir 90% dari harga awal, yaitu turun 10%."],
+ opt:["Faktor akhirnya 0,90, bukan 0,85.","Benar. Faktor 0,90 berarti turun 10%.","Ini hasil menjumlah (20 - 25 = -5). Jebakan klasik.","Akan benar hanya jika diskonnya sekitar 16,7%, bukan 25%.","Harga tidak mungkin naik: diskon 25% dihitung dari harga yang sudah naik, jadi lebih besar dari kenaikannya."],
+ fast:["Anggap harga awal 100. Naik 20% menjadi 120.","Diskon 25% dari 120 = 30, jadi sisa 90.","90 dibanding 100 berarti turun 10%. Angka 100 menghemat waktu."],
+ mn:"Persen berurutan: kali, jangan tambah.",
+ trap:"Menjumlah persen (20 - 25) menghasilkan 'turun 5%', pengecoh yang paling umum."},
+{sub:"TIU",topic:"Numerik: soal cerita (pekerjaan)",
+ q:"Andi dapat menyelesaikan suatu pekerjaan dalam 12 hari, Budi dalam 18 hari. Keduanya bekerja bersama selama 4 hari, kemudian Andi berhenti. Sisa pekerjaan diselesaikan Budi sendirian dalam ... hari.",
+ o:["6","7","8","9","10"],
+ k:"C",
+ core:"Yang ditanya: lama Budi menyelesaikan sisa pekerjaan setelah 4 hari bekerja bersama.",
+ kon:["Anggap pekerjaan 36 satuan (KPK dari 12 dan 18), supaya tidak berurusan dengan pecahan.","Laju Andi 36/12 = 3 satuan per hari. Laju Budi 36/18 = 2 satuan per hari.","Berdua 5 satuan per hari selama 4 hari = 20. Sisa 36 - 20 = 16. Budi 2 per hari, jadi 16/2 = 8 hari."],
+ opt:["6 hari x 2 = 12, masih kurang dari 16.","7 hari x 2 = 14, masih kurang 2.","Benar. 8 hari x 2 = 16.","9 hari x 2 = 18, melebihi sisa.","10 hari x 2 = 20, melebihi sisa."],
+ fast:["Ganti pekerjaan dengan KPK waktu: 36.","Hitung laju tiap orang sebagai bilangan bulat.","Hitung kerja bersama, kurangi dari total, bagi dengan laju yang tersisa."],
+ mn:"KPK dulu, pecahan hilang.",
+ trap:"Salah jika mengira Andi masih bekerja, atau memakai 1/12 + 1/18 tanpa KPK lalu keliru menghitung sisa."},
+{sub:"TIU",topic:"Numerik: deret",
+ q:"3, 4, 8, 17, 33, 58, ....",
+ o:["84","88","90","94","96"],
+ k:"D",
+ core:"Yang ditanya: suku berikutnya dari deret 3, 4, 8, 17, 33, 58.",
+ kon:["Naiknya tidak seragam, jadi hitung selisih antarsuku: 1, 4, 9, 16, 25.","Selisih itu adalah bilangan kuadrat: 1, 2, 3, 4, 5 dikuadratkan.","Selisih berikutnya 6 kuadrat = 36, maka 58 + 36 = 94."],
+ opt:["84 berarti menambah 26. Itu bukan bilangan kuadrat.","88 berarti menambah 30. Itu bukan bilangan kuadrat.","90 berarti menambah 32. Itu bukan bilangan kuadrat.","Benar. Menambah 36 (6 kuadrat).","96 berarti menambah 38. Itu bukan bilangan kuadrat."],
+ fast:["Naik tidak beraturan? Hitung selisihnya.","Selisih belum berpola? Cek apakah kuadrat, kubik, atau berlipat.","Hafal: 1, 4, 9, 16, 25, 36, 49."],
+ mn:"Kuadrat adalah sahabat deret: 1, 4, 9, 16, 25, 36.",
+ trap:"Mudah terjebak mencari pola jumlah dua suku sebelumnya. Cek selisih terlebih dahulu."},
+{sub:"TIU",topic:"Numerik: rata-rata",
+ q:"Rata-rata nilai 5 peserta pelatihan adalah 78. Jika seorang peserta bernilai 58 dikeluarkan dari perhitungan, rata-rata nilai peserta yang tersisa menjadi ....",
+ o:["82","83","84","85","86"],
+ k:"B",
+ core:"Yang ditanya: rata-rata baru setelah satu nilai dikeluarkan.",
+ kon:["Rata-rata dikali banyak data sama dengan total: 78 x 5 = 390.","Keluarkan 58, totalnya menjadi 332, dengan 4 peserta tersisa.","Rata-rata baru = 332 / 4 = 83."],
+ opt:["332 dibagi 4 adalah 83, bukan 82.","Benar. 332 / 4 = 83.","332 dibagi 4 adalah 83, bukan 84.","332 dibagi 4 adalah 83, bukan 85.","332 dibagi 4 adalah 83, bukan 86."],
+ fast:["Rata-rata selalu lewat total.","Total lama dikurangi nilai yang keluar, itu total baru.","Bagi dengan jumlah data yang baru."],
+ mn:"Rata-rata, ubah ke total, ubah lagi ke rata-rata.",
+ trap:"Salah jika langsung 78 dikurangi 58, atau masih membagi dengan 5."},
+{sub:"TIU",topic:"Logika analitis: urutan posisi",
+ q:"Lima pegawai (P, Q, R, S, T) duduk berjajar dari kiri ke kanan pada posisi 1 sampai 5.\n- R duduk di ujung kiri dan P di ujung kanan.\n- T duduk tepat di sebelah kanan Q.\n- S tidak duduk bersebelahan dengan R.\nPegawai yang duduk di posisi tengah (posisi 3) adalah ....",
+ o:["T","Q","R","S","P"],
+ k:"A",
+ core:"Yang ditanya: siapa yang duduk di posisi 3 setelah semua syarat dipenuhi.",
+ kon:["Isi yang pasti dulu: R di posisi 1, P di posisi 5.","Q dan T berdampingan dengan T di kanan Q. Pasangan itu hanya muat di posisi (2,3) atau (3,4).","Jika (3,4), S tersisa di posisi 2 dan bersebelahan dengan R (dilarang). Jadi Q-T di (2,3) dan S di 4. Urutan akhir: R, Q, T, S, P."],
+ opt:["Benar. T berada di posisi 3.","Q berada di posisi 2, bukan 3.","R berada di posisi 1, bukan 3.","S berada di posisi 4, bukan 3.","P berada di posisi 5, bukan 3."],
+ fast:["Gambar lima kotak bernomor.","Isi yang pasti (ujung-ujung), lalu uji kemungkinan pasangan.","Jika satu skenario melanggar syarat, skenario lainnya pasti benar."],
+ mn:"R - Q - T - S - P, dibaca dari kiri.",
+ trap:"Setiap opsi adalah orang yang memang ada di barisan, tetapi di posisi lain. Pastikan posisinya, bukan sekadar namanya."},
+{sub:"TIU",topic:"Numerik: kecepatan rata-rata",
+ q:"Seorang kurir menempuh rute pergi dengan kecepatan rata-rata 60 km/jam dan kembali lewat rute yang sama dengan kecepatan rata-rata 40 km/jam. Kecepatan rata-rata untuk seluruh perjalanan pergi-pulang adalah ... km/jam.",
+ o:["45","46","48","50","52"],
+ k:"C",
+ core:"Yang ditanya: kecepatan rata-rata seluruh perjalanan pergi-pulang pada jarak yang sama.",
+ kon:["Kecepatan rata-rata = total jarak dibagi total waktu, bukan rata-rata dua kecepatan.","Misalkan satu arah 120 km: pergi 120/60 = 2 jam, pulang 120/40 = 3 jam.","Total 240 km dalam 5 jam = 48 km/jam. Rumus cepatnya: 2ab / (a + b)."],
+ opt:["45 tidak sesuai: 240 km dibagi 5 jam adalah 48.","46 tidak sesuai: 240 km dibagi 5 jam adalah 48.","Benar. 240 km / 5 jam = 48 km/jam.","50 adalah rata-rata biasa (60 + 40) / 2. Ini mengabaikan bahwa waktu di kecepatan rendah lebih lama.","52 tidak sesuai: 240 km dibagi 5 jam adalah 48."],
+ fast:["Pilih jarak yang habis dibagi 60 dan 40, misalnya 120 km.","Hitung total jarak dan total waktu.","Atau langsung pakai 2ab / (a + b) untuk jarak sama."],
+ mn:"Jarak sama, kecepatan beda: pakai harmonik, bukan rata-rata biasa.",
+ trap:"Angka 50 terasa alami karena merupakan 'tengah-tengah', tetapi itu jebakan."},
+
+/* ---------- TKP (8) ---------- */
+{sub:"TKP",topic:"Pelayanan publik",
+ q:"Anda petugas loket layanan. Antrean panjang. Seorang warga marah karena berkasnya kurang surat pengantar RT dan menuntut tetap dilayani. Sikap Anda ....",
+ o:["Menyarankan warga bertanya kepada petugas informasi","Menjelaskan dengan sopan kekurangan berkas, memberi daftar persyaratan tertulis, dan menunjukkan cara tercepat melengkapinya","Mengabaikan protes warga dan memanggil nomor antrean berikutnya","Menerima berkas yang kurang agar tidak terjadi keributan dan berharap dilengkapi kemudian","Menjelaskan dengan sopan bahwa berkas kurang karena belum ada surat pengantar RT, lalu meminta warga kembali setelah melengkapinya agar layanan dapat diproses sesuai aturan"],
+ s:[3,5,1,2,4],
+ core:"Nilai yang diuji: pelayanan publik, yaitu ramah, sesuai aturan, dan memberi solusi.",
+ kon:["Warga yang marah butuh kejelasan dan jalan keluar, bukan penolakan mentah.","Persyaratan tidak boleh dilonggarkan demi menghindari keributan.","Skor 5 menggabungkan tiga hal: sopan, jelas, dan solusi tercepat."],
+ opt:["Mengarahkan memang benar, tetapi melempar warga ke petugas lain tanpa penjelasan.","Sopan, jelas, tertulis, dan mempercepat warga melengkapi berkas. Lengkap.","Mengabaikan warga melanggar prinsip pelayanan publik.","Melanggar prosedur dan berisiko menimbulkan masalah di kemudian hari.","Benar dan sopan, tetapi tidak membantu warga menemukan cara tercepat melengkapi berkas."],
+ fast:["Bayangkan petugas ideal: ramah, tegas pada aturan, dan solutif.","Coret dulu opsi yang mengabaikan atau melanggar aturan.","Dari opsi yang tersisa, pilih yang paling lengkap membantu warga."],
+ mn:"Sopan + aturan + solusi = skor 5.",
+ trap:"Opsi D tampak 'baik hati' tetapi melanggar aturan. Kebaikan yang melanggar prosedur bukan skor tertinggi."},
+{sub:"TKP",topic:"Jejaring kerja",
+ q:"Anda harus menyerahkan laporan besok pagi, tetapi rekan dari unit lain belum memberi data yang Anda perlukan dan tidak merespons pesan. Sikap Anda ....",
+ o:["Menunda laporan sampai data diberikan tanpa memberi tahu siapa pun","Menyusun laporan dengan data seadanya tanpa menyebut keterbatasannya","Menghubungi rekan kembali lewat telepon dan menegaskan tenggat laporan","Melaporkan ketidakresponsifan rekan itu kepada atasan tanpa menghubungi rekan lebih dulu","Menghubungi rekan secara santun untuk memahami kendalanya, menawarkan format permintaan data yang lebih ringkas, dan memberi tahu atasan bila tetap terhambat"],
+ s:[1,2,4,3,5],
+ core:"Nilai yang diuji: jejaring kerja, yaitu komunikasi lintas unit.",
+ kon:["Hambatan antarunit diselesaikan dulu lewat komunikasi langsung yang santun.","Eskalasi ke atasan dilakukan setelah upaya sendiri, supaya hubungan kerja tidak rusak.","Tenggat dijaga secara transparan, bukan disembunyikan."],
+ opt:["Diam dan menunda tanpa kabar membahayakan tenggat.","Laporan jadi tidak akurat dan keterbatasannya disembunyikan.","Sudah aktif menghubungi, tetapi masih satu arah: menegaskan tenggat tanpa memahami kendala rekan.","Melapor ke atasan sebelum mencoba berkomunikasi berisiko merusak hubungan.","Memahami kendala, mempermudah rekan, dan menyiapkan eskalasi bila perlu."],
+ fast:["Urutan ideal: komunikasi langsung, permudah rekan, lalu eskalasi bila perlu.","Hindari opsi yang menyembunyikan masalah.","Cek apakah opsi menjaga hubungan sekaligus target."],
+ mn:"Hubungi dulu, bantu dulu, baru naik ke atasan.",
+ trap:"Opsi C terlihat proaktif, tetapi hanya menekan. Skor 5 juga membantu rekan menyelesaikan masalahnya."},
+{sub:"TKP",topic:"Sosial budaya",
+ q:"Anda baru dipindahtugaskan ke daerah dengan adat berbeda. Warga menggelar upacara adat pada hari kerja dan seluruh pegawai setempat diundang. Sikap Anda ....",
+ o:["Hadir sebentar untuk menghormati undangan, lalu kembali bekerja agar pelayanan kepada masyarakat tidak terganggu dan tugas hari itu tetap selesai","Mengkritik acara itu sebagai pemborosan di hadapan rekan","Tidak hadir karena belum memahami adat setempat dan memilih bekerja","Berkoordinasi dengan atasan agar pelayanan tetap berjalan, lalu ikut berpartisipasi dan belajar makna adat tersebut","Menanyakan alasan acara dan berpartisipasi hanya jika diwajibkan"],
+ s:[4,1,2,5,3],
+ core:"Nilai yang diuji: sosial budaya, yaitu menghormati keberagaman tanpa mengabaikan tugas.",
+ kon:["ASN menghormati adat dan budaya setempat.","Tugas pelayanan tetap harus berjalan, sehingga perlu koordinasi dengan atasan.","Belajar memahami makna adat menunjukkan sikap terbuka."],
+ opt:["Menghormati dan menjaga tugas, tetapi kurang berinteraksi untuk mempelajari adat.","Mengkritik budaya di depan rekan merusak hubungan sosial.","Menghindar karena belum paham menutup kesempatan belajar.","Menyeimbangkan budaya dan tugas lewat koordinasi, partisipasi, dan belajar.","Berpartisipasi minimal hanya jika diwajibkan. Sikapnya pasif."],
+ fast:["Cari opsi yang menghormati budaya DAN menjaga tugas.","Coret yang mengkritik atau menghindar.","Pilih yang melibatkan koordinasi dan sikap belajar."],
+ mn:"Hormati adatnya, jaga tugasnya, belajar maknanya.",
+ trap:"Panjang opsi tidak menentukan skor. Opsi A juga panjang, tetapi kurang mendalam dalam berinteraksi."},
+{sub:"TKP",topic:"Teknologi informasi dan komunikasi",
+ q:"Anda menerima email yang mengatasnamakan instansi seleksi ASN dan meminta login ulang akun Anda lewat tautan agar tidak dibekukan. Sikap Anda ....",
+ o:["Mengklik tautan untuk melihat tampilannya tanpa memasukkan data","Segera login agar akun tidak dibekukan","Tidak mengklik tautan, memverifikasi lewat kanal resmi, melaporkan email ke admin TI, dan mengingatkan rekan","Menghapus email tanpa tindakan lain","Bertanya kepada rekan apakah mereka menerima email serupa sebelum memutuskan"],
+ s:[2,1,5,4,3],
+ core:"Nilai yang diuji: teknologi informasi, yaitu kewaspadaan terhadap phishing.",
+ kon:["Instansi resmi tidak meminta login ulang lewat tautan di email, apalagi dengan ancaman pembekuan.","Jangan klik tautan mencurigakan, meski berniat tidak mengisi data.","Verifikasi lewat kanal resmi dan laporkan agar rekan lain ikut terlindungi."],
+ opt:["Mengklik saja sudah berisiko (pelacakan, malware).","Menyerahkan kredensial kepada penipu.","Aman, terverifikasi, melapor, dan melindungi rekan.","Aman, tetapi tidak melapor dan tidak melindungi pihak lain.","Bertanya ke rekan bukan verifikasi resmi dan keputusan jadi bergantung pada tebakan."],
+ fast:["Curigai tanda-tanda: mendesak, mengancam, ada tautan.","Jangan klik. Verifikasi lewat kanal resmi.","Laporkan ke admin TI dan ingatkan rekan."],
+ mn:"Desak + ancam + tautan = curiga. Jangan klik.",
+ trap:"Rasa penasaran. Opsi A terasa aman karena 'tidak mengisi data', padahal klik saja sudah berisiko."},
+{sub:"TKP",topic:"Profesionalisme",
+ q:"Anda menemukan kesalahan angka pada laporan yang sudah dikirim ke pimpinan. Belum ada yang menyadarinya. Sikap Anda ....",
+ o:["Segera melapor kepada atasan, menyampaikan koreksi dan dampaknya, lalu mengirim versi perbaikan","Menyalahkan sumber data karena menyebabkan kesalahan","Memperbaiki dan mengirim revisi kepada pimpinan lebih dulu agar kesalahan tidak berlanjut, lalu memberi tahu atasan setelahnya","Menunggu apakah ada pihak yang menanyakan angka tersebut","Memperbaiki arsip internal agar laporan berikutnya benar"],
+ s:[5,1,4,2,3],
+ core:"Nilai yang diuji: profesionalisme, yaitu akuntabilitas dan transparansi.",
+ kon:["Kesalahan yang diketahui harus segera dilaporkan, walau belum ada yang sadar.","Pimpinan perlu tahu dampaknya agar bisa mengambil keputusan yang benar.","Memperbaiki saja tanpa melapor menunda transparansi."],
+ opt:["Bertanggung jawab, transparan, dan segera memperbaiki dengan menilai dampak.","Menyalahkan pihak lain adalah bentuk menghindari tanggung jawab.","Hampir sempurna, tetapi atasan baru tahu belakangan. Urutannya keliru.","Menunggu berarti membiarkan kesalahan beredar.","Memperbaiki arsip tidak menangani laporan yang sudah terkirim."],
+ fast:["Urutan: lapor, jelaskan dampak, perbaiki.","Coret opsi yang menyalahkan atau menunggu.","Bandingkan dua opsi terbaik dari sisi urutan: transparansi dulu atau perbaikan dulu?"],
+ mn:"Lapor dulu, perbaiki kemudian.",
+ trap:"Opsi C hampir sempurna. Pembedanya adalah urutan: melapor lebih dulu, bukan merevisi lebih dulu."},
+{sub:"TKP",topic:"Anti radikalisme",
+ q:"Di grup WhatsApp kantor, seorang rekan membagikan pesan yang menghasut kebencian terhadap kelompok agama tertentu dan mengajak menolak kebijakan pemerintah dengan cara anarkis. Sikap Anda ....",
+ o:["Keluar dari grup dan tidak berkomentar","Tidak menyebarkan pesan itu, menegur rekan secara pribadi agar berhenti membagikannya, dan melapor kepada atasan atau pihak berwenang bila berlanjut","Meneruskan pesan ke grup lain untuk meminta pendapat","Mengabaikan karena dianggap urusan pribadi rekan","Mengingatkan di grup bahwa konten tersebut tidak sejalan dengan nilai ASN"],
+ s:[3,5,1,2,4],
+ core:"Nilai yang diuji: anti radikalisme dan pembinaan sesama ASN.",
+ kon:["ASN wajib menjaga Pancasila dan kebinekaan. Ujaran kebencian bertentangan dengan itu.","Langkah bertahap: jangan ikut menyebarkan, tegur secara pribadi, lapor bila berlanjut.","Menegur pribadi menjaga martabat rekan sambil tetap tegas pada isi pesan."],
+ opt:["Menghindar. Masalahnya tidak ditangani.","Bertahap dan beradab: tegas pada isi, menghargai pribadi, ada eskalasi.","Ikut menyebarkan ujaran kebencian, sangat tidak tepat.","Membiarkan sama dengan menyetujui secara diam-diam.","Tegas, tetapi menegur di depan umum dapat mempermalukan rekan dan memicu debat."],
+ fast:["Pegang pola: jangan sebar, tegur pribadi, lapor bila lanjut.","Coret opsi yang ikut menyebarkan atau membiarkan.","Bandingkan 'tegur pribadi' dengan 'tegur di grup': yang pribadi lebih tepat lebih dulu."],
+ mn:"Tegur dengan hormat, tegas pada isi, lapor bila berlanjut.",
+ trap:"Opsi E tampak berani dan tegas, tetapi menegur di depan banyak orang bukan langkah pertama yang terbaik."},
+{sub:"TKP",topic:"Pelayanan publik: inisiatif",
+ q:"Aplikasi layanan di unit Anda sering error pada jam sibuk dan Anda berulang kali menerima keluhan pengguna. Sikap Anda ....",
+ o:["Menyampaikan bahwa masalah itu bukan wewenang unit Anda","Meminta pengguna mencoba lagi di jam sepi","Mencatat pola keluhan (jam dan jenis error), melaporkan ke tim TI disertai usulan perbaikan, dan menyediakan layanan alternatif sementara","Menghindari pengguna yang mengeluh","Melaporkan ke tim TI setiap ada keluhan masuk, lengkap dengan tangkapan layar dan waktu kejadian dari pengguna"],
+ s:[2,3,5,1,4],
+ core:"Nilai yang diuji: pelayanan publik, khususnya inisiatif memperbaiki layanan.",
+ kon:["Keluhan berulang adalah data untuk memperbaiki sistem.","Pola (jam dan jenis error) membuat tim TI bekerja lebih efektif.","Layanan alternatif sementara menjaga pengguna tetap terlayani."],
+ opt:["Melempar tanggung jawab tidak menyelesaikan keluhan pengguna.","Menyarankan jam sepi hanya menghindari masalah.","Proaktif dengan data, mengusulkan solusi, dan menjaga layanan tetap berjalan.","Menghindar dari pengguna bertentangan dengan semangat melayani.","Baik karena melapor, tetapi satu per satu tanpa pola dan tanpa solusi sementara."],
+ fast:["Cari opsi yang memadukan data, usulan solusi, dan layanan sementara.","Coret opsi yang menghindar atau melempar.","Bandingkan 'melapor tiap keluhan' dengan 'melapor pola': pola lebih bernilai."],
+ mn:"Catat pola, usul solusi, jaga layanan.",
+ trap:"Opsi E sudah baik, tetapi hanya meneruskan keluhan. Skor 5 mengolahnya menjadi pola dan solusi."},
+{sub:"TKP",topic:"Jejaring kerja: kerja tim",
+ q:"Dua rekan satu tim berselisih soal pembagian tugas sehingga proyek tertunda. Anda bukan ketua tim. Sikap Anda ....",
+ o:["Membicarakan perselisihan itu di luar tim","Memihak rekan yang lebih dekat dengan Anda","Mengerjakan bagian sendiri dengan baik dan tidak ikut campur","Melaporkan ke ketua tim dan menyerahkan penyelesaian kepadanya","Mengajak keduanya berdiskusi berdasarkan tujuan tim, menawarkan usulan pembagian tugas, dan melibatkan ketua tim bila belum ada titik temu"],
+ s:[1,2,3,4,5],
+ core:"Nilai yang diuji: jejaring kerja, yaitu kerja tim dan penyelesaian konflik.",
+ kon:["Konflik diselesaikan dengan menyatukan kembali tujuan tim.","Menawarkan usulan membantu kedua pihak keluar dari kebuntuan.","Ketua tim dilibatkan sebagai langkah lanjutan, bukan satu-satunya langkah."],
+ opt:["Menggunjing di luar tim merusak kepercayaan dan tidak menyelesaikan masalah.","Memihak memperdalam perselisihan.","Aman tetapi pasif. Proyek tetap tertunda.","Melaporkan itu benar, tetapi menyerahkan semuanya tanpa berusaha membantu.","Mediasi berbasis tujuan tim, ada usulan, dan eskalasi bila perlu."],
+ fast:["Urutan: satukan tujuan, usulkan solusi, libatkan ketua bila perlu.","Coret opsi yang menggunjing atau memihak.","Bandingkan opsi pasif, opsi lapor, dan opsi mediasi: mediasi paling lengkap."],
+ mn:"Satukan tujuan, tawarkan solusi, libatkan ketua.",
+ trap:"Opsi D masih terasa 'prosedural dan aman'. Skor 5 menuntut kamu ikut berkontribusi menyelesaikan."}
+];
+
+/* ===== KONSTANTA ===== */
+var TOTAL_SEC = 22*60;
+var PG = {TWK:65, TIU:80, TKP:166};
+var MAXFULL = {TWK:150, TIU:175, TKP:225};
+var N = {TWK:8, TIU:9, TKP:8};
+var PACE = TOTAL_SEC/Q.length;
+var LETTERS = ["A","B","C","D","E"];
+var TKP_TARGET = 195;
+var LS_HIST = "skd_tracker_v1", LS_SESS = "skd_session_v1", LS_FS = "skd_fontsize_v1";
+var FAM=["F","R","I","F","F","B","F","F", "L","L","L","H","H","H","H","L","H", "K","K","K","K","K","K","K","K"];
+var FAMT={
+ F:{n:"Fakta mirip",d:"Opsi pengecoh hampir sama dengan jawaban benar dan hanya beda satu detail (pasal, tokoh, lembaga, urutan). Kecenderungan: menjawab dari rasa 'pernah dengar', bukan mencocokkan detail persis.",t:"Coret opsi yang salah di satu detail. Jika dua opsi mirip, bandingkan hanya bagian yang berbeda. Hafalkan pasangan fakta, bukan fakta tunggal."},
+ R:{n:"Salah baca fokus soal",d:"Terpancing hasil atau kesan umum, padahal soal menanyakan hal lain (misalnya proses, bukan hasil).",t:"Sebelum membaca opsi, tulis dulu kata tanyanya: apa yang sebenarnya ditanyakan? Garis bawahi kata kunci."},
+ I:{n:"Jalur resmi vs tindakan senyap",d:"Memilih tindakan senyap atau setengah jalan (menerima, mengembalikan diam-diam, menunggu) alih-alih jalur resmi yang transparan.",t:"Untuk soal integritas, pilih opsi yang melibatkan jalur resmi dan transparan. Coret opsi bertanda 'diam-diam', 'menunggu', atau 'membagikan'."},
+ B:{n:"Aturan kalimat efektif",d:"Kurang teliti pada pemborosan kata dan penjamakan ganda.",t:"Cek penanda jamak dan kata mubazir lebih dulu: para + kata ulang, banyak + para, beberapa + semua."},
+ H:{n:"Rumus dan hitungan",d:"Salah memilih rumus atau terjebak hasil intuitif (menjumlahkan persen, memakai rata-rata biasa untuk kecepatan).",t:"Kerjakan lewat bilangan bulat (KPK, total, faktor pengali). Beri batas sekitar 60 detik; bila lewat, tandai ragu dan lanjut."},
+ L:{n:"Penalaran melampaui premis",d:"Kesimpulan menyimpang dari premis atau teks. Opsi tampak masuk akal tetapi tidak ditunjang data, atau tergoda opsi bermakna mutlak.",t:"Uji tiap opsi hanya terhadap premis atau teks, bukan terhadap pengetahuan sendiri. Gambar diagram atau kotak. Curigai kata mutlak."},
+ K:{n:"Respons aman tetapi pasif",d:"Memilih respons aman atau pasif (menunggu, hanya melapor, menghindar) padahal skor 5 menuntut respons yang proaktif, sesuai aturan, dan solutif.",t:"Urutkan opsi dari pasif ke proaktif. Skor 5 umumnya menggabungkan komunikasi langsung, kepatuhan aturan, solusi, dan tindak lanjut ke pihak yang tepat. Panjang opsi bukan patokan."}
+};
+
+/* ===== IKON ===== */
+var ICO={
+ target:'<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>',
+ book:'<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
+ zap:'<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
+ alert:'<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
+ star:'<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>'
+};
+function ico(n){ return '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">'+ICO[n]+'</svg>'; }
+
+/* ===== STORAGE (kenyamanan satu browser; boleh kosong) ===== */
+function lsGet(k){ try{ var v=localStorage.getItem(k); return v?JSON.parse(v):null; }catch(e){ return null; } }
+function lsSet(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); return true; }catch(e){ return false; } }
+function lsDel(k){ try{ localStorage.removeItem(k); }catch(e){} }
+
+/* ===== UTIL ===== */
+function esc(s){ return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];}); }
+function fmt(sec){ sec=Math.max(0,Math.round(sec)); var m=Math.floor(sec/60), s=sec%60; return (m<10?"0":"")+m+":"+(s<10?"0":"")+s; }
+function $(id){ return document.getElementById(id); }
+function statusOf(v,pg){ return v>=pg?"ok":(v>=pg*0.9?"near":"low"); }
+function statusLabel(c){ return c==="ok"?"Di atas PG":(c==="near"?"Dekat PG":"Di bawah PG"); }
+function mainOf(q){ return q.topic.split(":")[0]; }
+function bySub(sub){ return Q.map(function(q,i){return i;}).filter(function(i){return Q[i].sub===sub;}); }
+function copyText(text,msg){
+  var ta=document.createElement("textarea"); ta.value=text; ta.setAttribute("readonly",""); ta.style.cssText="position:fixed;left:-9999px;top:0";
+  document.body.appendChild(ta); ta.focus(); ta.select();
+  var fail="Gagal menyalin. Salin teksnya secara manual.", done=false;
+  try{ if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(function(){msg.textContent="Tersalin.";},function(){msg.textContent=fail;}); done=true; } }catch(e){}
+  if(!done){ try{ done=document.execCommand("copy"); }catch(e){} msg.textContent=done?"Tersalin.":fail; }
+  ta.remove();
+}
+
+/* ===== UKURAN HURUF ===== */
+var FS={n:"18px",b:"21px",x:"24px"};
+function getFs(){ var v=lsGet(LS_FS); return (v&&FS[v])?v:"n"; }
+function applyFs(){ var v=getFs(); document.documentElement.style.setProperty("--fs",FS[v]);
+  Array.prototype.forEach.call(document.querySelectorAll("[data-fs]"),function(b){ b.classList.toggle("on",b.getAttribute("data-fs")===v); b.setAttribute("aria-pressed",b.getAttribute("data-fs")===v?"true":"false"); }); }
+function fsCtl(){ return '<div class="fsw" role="group" aria-label="Ukuran huruf"><button type="button" class="fsb" data-fs="n" aria-label="Huruf normal">A</button><button type="button" class="fsb" data-fs="b" aria-label="Huruf besar">A</button><button type="button" class="fsb" data-fs="x" aria-label="Huruf sangat besar">A</button></div>'; }
+document.addEventListener("click",function(e){ var b=e.target.closest("[data-fs]"); if(!b) return; lsSet(LS_FS,b.getAttribute("data-fs")); applyFs(); });
+
+/* ===== SKOR ===== */
+function scoreAll(ans){
+  var raw={TWK:0,TIU:0,TKP:0}, correct={TWK:0,TIU:0}, per=[];
+  Q.forEach(function(q,i){
+    var a=ans[i], pts=0, ok=false;
+    if(a!==undefined&&a!==null){
+      if(q.sub==="TKP"){ pts=q.s[a]; ok=(pts===5); }
+      else { ok=(LETTERS[a]===q.k); pts=ok?5:0; if(ok) correct[q.sub]++; }
+    }
+    raw[q.sub]+=pts; per.push({pts:pts,ok:ok,answered:(a!==undefined&&a!==null)});
+  });
+  var scaled={
+    TWK:Math.round(raw.TWK/(N.TWK*5)*MAXFULL.TWK),
+    TIU:Math.round(raw.TIU/(N.TIU*5)*MAXFULL.TIU),
+    TKP:Math.round(raw.TKP/(N.TKP*5)*MAXFULL.TKP)
+  };
+  scaled.total=scaled.TWK+scaled.TIU+scaled.TKP;
+  return {raw:raw,correct:correct,per:per,scaled:scaled};
+}
+
+/* ===== STATE ===== */
+var S=null, timerId=null, lastTick=0;
+function newSession(){
+  var now=Date.now();
+  S={idx:0,ans:{},flags:{},times:{},start:now,deadline:now+TOTAL_SEC*1000,done:false,at:now};
+  lsSet(LS_SESS,S); lastTick=now; startTimer(); renderTest();
+}
+function save(){ lsSet(LS_SESS,S); }
+
+/* ===== LAYAR: INTRO ===== */
+function renderIntro(){
+  var sess=lsGet(LS_SESS), resumable=sess&&!sess.done&&sess.deadline>Date.now();
+  var app=$("app");
+  app.innerHTML=
+  '<div class="wrap stack">'+
+   '<div class="row between"><span class="tag">FASE DIAGNOSTIK</span>'+fsCtl()+'</div>'+
+   '<div class="hero stack" style="gap:10px"><h1>Mini-tryout SKD CPNS</h1>'+
+   '<p>25 soal, 22 menit. Tujuannya mengukur skor awal dan kecepatanmu, bukan menilai kesiapan akhir. Tenang, ini titik start.</p></div>'+
+   '<div class="grid3">'+
+      '<div class="scorebox s-TWK"><span class="tag" style="align-self:flex-start">TWK</span><span class="big">8 soal</span><span class="small muted">Benar 5 poin. Salah atau kosong 0.</span></div>'+
+      '<div class="scorebox s-TIU"><span class="tag" style="align-self:flex-start">TIU</span><span class="big">9 soal</span><span class="small muted">Benar 5 poin. Salah atau kosong 0.</span></div>'+
+      '<div class="scorebox s-TKP"><span class="tag" style="align-self:flex-start">TKP</span><span class="big">8 soal</span><span class="small muted">Tiap opsi bernilai 1 sampai 5. Hanya skor 5 yang dihitung tepat sasaran.</span></div>'+
+   '</div>'+
+   '<div class="card stack"><h2>Aturan main</h2>'+
+    '<ul class="dots">'+
+     '<li>Tempo setara SKD asli: 100 menit untuk 110 soal, sekitar 54 detik per soal. Di sini sekitar 53 detik per soal.</li>'+
+     '<li>Waktu tidak bisa dijeda. Jika halaman tertutup, hitungan tetap berjalan dan sesi bisa dilanjutkan selama waktu belum habis.</li>'+
+     '<li>Kamu bebas pindah soal dan menandai soal yang ragu. Jawab semua soal, karena tidak ada pengurangan nilai untuk jawaban salah di TWK dan TIU.</li>'+
+     '<li>Semua soal ditulis orisinal untuk paket ini. Soal figural tidak diuji di paket diagnostik ini.</li>'+
+     '<li>Paket ini campuran karena memang Diagnostik. Sesi latihan berikutnya hanya satu subtes per sesi, kecuali Full Tryout.</li>'+
+     '<li>Huruf terasa kecil? Pakai tombol A di kanan atas untuk memperbesar.</li>'+
+    '</ul>'+
+    '<div class="row">'+
+      (resumable?'<button class="btn primary" id="btnResume">Lanjutkan sesi ('+fmt((sess.deadline-Date.now())/1000)+' tersisa)</button><button class="btn" id="btnStart">Mulai ulang</button>':'<button class="btn primary" id="btnStart">Mulai tes 22 menit</button>')+
+    '</div>'+
+   '</div>'+
+   '<div class="card stack"><h2>Acuan passing grade</h2>'+
+    '<div class="scroll-x"><table class="pg"><thead><tr><th>Subtes</th><th>Soal asli</th><th>Nilai maks</th><th>Passing grade</th></tr></thead><tbody>'+
+    '<tr><td>TWK</td><td>30</td><td>150</td><td>65</td></tr><tr><td>TIU</td><td>35</td><td>175</td><td>80</td></tr><tr><td>TKP</td><td>45</td><td>225</td><td>166</td></tr></tbody></table></div>'+
+    '<p class="small muted">Acuan: KepmenPANRB 321/2024, formasi umum. Belum ada pengumuman resmi nilai ambang batas untuk seleksi 2026 yang saya verifikasi; cek ulang saat pengumuman keluar. Lolos passing grade hanya syarat minimum. Penentuan akhir juga bergantung pada peringkat pada formasi yang dilamar.</p></div>'+
+   '<div id="trk"></div>'+
+  '</div>';
+  var b=$("btnStart"); if(b) b.onclick=function(){ newSession(); };
+  var r=$("btnResume"); if(r) r.onclick=function(){ S=sess; lastTick=Date.now(); startTimer(); renderTest(); };
+  renderTracker("trk"); applyFs();
+}
+
+/* ===== LAYAR: TES ===== */
+function startTimer(){ if(timerId) clearInterval(timerId); timerId=setInterval(tick,250); }
+function tick(){
+  if(!S||S.done) return;
+  var now=Date.now(), dt=Math.min(now-lastTick,1000)/1000; lastTick=now;
+  S.times[S.idx]=(S.times[S.idx]||0)+dt;
+  var rem=Math.ceil((S.deadline-now)/1000);
+  var t=$("timer");
+  if(t){ t.textContent=fmt(rem); t.className="timer"+(rem<=60?" crit":(rem<=300?" warn":"")); }
+  if(rem<=0){ finish(true); }
+}
+function renderTest(){
+  var q=Q[S.idx], i=S.idx, app=$("app");
+  var sel=S.ans[i];
+  var opts=q.o.map(function(t,j){
+    return '<label class="opt'+(sel===j?' sel':'')+'" for="o'+j+'"><input type="radio" name="opt" id="o'+j+'" value="'+j+'"'+(sel===j?' checked':'')+'><span class="bub">'+LETTERS[j]+'</span><span>'+esc(t)+'</span></label>';
+  }).join("");
+  var nav=Q.map(function(x,k){
+    var cls=(S.ans[k]!==undefined?" done":"")+(k===i?" cur":"")+(S.flags[k]?" flag":"");
+    return '<button type="button" class="'+cls.trim()+'" data-k="'+k+'" aria-label="Soal '+(k+1)+(S.ans[k]!==undefined?', terjawab':', belum dijawab')+(S.flags[k]?', ditandai ragu':'')+'">'+(k+1)+'</button>';
+  }).join("");
+  var answered=Object.keys(S.ans).length;
+  app.innerHTML=
+  '<div class="topbar"><div class="wrap"><div style="min-width:0"><div class="small muted">Soal '+(i+1)+' dari '+Q.length+' &middot; terjawab '+answered+'</div><div class="bar" style="width:150px;margin-top:6px"><i style="width:'+(answered/Q.length*100)+'%"></i></div></div><div class="row" style="flex-wrap:nowrap">'+fsCtl()+'<div class="timer" id="timer" role="timer" aria-live="off">'+fmt((S.deadline-Date.now())/1000)+'</div></div></div></div>'+
+  '<div class="wrap stack">'+
+   '<div class="card qcard s-'+q.sub+'"><div class="row between"><span class="tag">'+q.sub+'</span><span class="small muted">'+esc(q.topic)+'</span></div>'+
+   '<p class="qtext" style="margin-top:14px">'+esc(q.q)+'</p>'+
+   '<fieldset class="opts" aria-label="Pilihan jawaban">'+opts+'</fieldset></div>'+
+   '<div class="row between">'+
+     '<button class="btn" id="bPrev"'+(i===0?' disabled':'')+'>Sebelumnya</button>'+
+     '<button class="btn" id="bFlag">'+(S.flags[i]?'Hapus tanda ragu':'Tandai ragu')+'</button>'+
+     '<button class="btn primary" id="bNext"'+(i===Q.length-1?' disabled':'')+'>Berikutnya</button>'+
+   '</div>'+
+   '<div class="card stack"><div class="nav" id="nav">'+nav+'</div>'+
+    '<div class="legend"><span><i style="background:var(--accent-soft);border-color:var(--accent)"></i>Terjawab</span><span><i></i>Belum</span><span><i style="background:var(--warn);border-color:var(--warn);border-radius:50%"></i>Ragu</span></div></div>'+
+   '<div class="row" style="justify-content:flex-end"><button class="btn danger" id="bFinish">Selesai dan lihat hasil</button></div>'+
+  '</div>';
+  Array.prototype.forEach.call(document.querySelectorAll("input[name=opt]"),function(el){
+    el.onchange=function(){ S.ans[i]=parseInt(el.value,10); save(); renderTest(); };
+  });
+  $("bPrev").onclick=function(){ go(i-1); };
+  $("bNext").onclick=function(){ go(i+1); };
+  $("bFlag").onclick=function(){ if(S.flags[i]) delete S.flags[i]; else S.flags[i]=1; save(); renderTest(); };
+  $("nav").onclick=function(e){ var b=e.target.closest("button[data-k]"); if(b) go(parseInt(b.getAttribute("data-k"),10)); };
+  $("bFinish").onclick=confirmFinish;
+  applyFs(); tick();
+}
+function go(k){ if(k<0||k>=Q.length) return; S.idx=k; save(); renderTest(); window.scrollTo(0,0); }
+function confirmFinish(){
+  var un=Q.length-Object.keys(S.ans).length, fl=Object.keys(S.flags).length;
+  var m=document.createElement("div"); m.className="modal"; m.id="modal";
+  m.innerHTML='<div class="card stack" role="dialog" aria-modal="true" aria-label="Konfirmasi selesai"><h2>Akhiri tes sekarang?</h2><p>'+(un>0?'Masih ada <b>'+un+'</b> soal belum dijawab. Soal kosong bernilai 0.':'Semua soal sudah dijawab.')+(fl?' '+fl+' soal ditandai ragu.':'')+'</p><div class="row" style="justify-content:flex-end"><button class="btn" id="mNo">Kembali ke soal</button><button class="btn primary" id="mYes">Ya, selesai</button></div></div>';
+  document.body.appendChild(m);
+  $("mNo").onclick=function(){ m.remove(); }; $("mYes").onclick=function(){ m.remove(); finish(false); };
+  $("mNo").focus();
+}
+
+/* ===== SELESAI ===== */
+function finish(auto){
+  if(!S||S.done) return;
+  tick(); S.done=true; S.auto=!!auto; S.endedAt=Date.now(); save();
+  if(timerId){ clearInterval(timerId); timerId=null; }
+  var r=scoreAll(S.ans);
+  var h=lsGet(LS_HIST)||[];
+  h.push({t:S.endedAt,label:"Diagnostik 25 soal (estimasi)",TWK:r.scaled.TWK,TIU:r.scaled.TIU,TKP:r.scaled.TKP,est:true});
+  lsSet(LS_HIST,h);
+  renderResult(auto);
+}
+
+/* ===== LAYAR: HASIL ===== */
+function reviewCard(i,r){
+  var q=Q[i], p=r.per[i], a=S.ans[i], cls, head;
+  if(q.sub==="TKP"){ cls=p.ok?"ok":(p.answered&&p.pts===4?"part":"bad"); head=p.answered?('Skor '+p.pts+(p.ok?' (tepat sasaran)':' (meleset)')):'Kosong (0)'; }
+  else { cls=p.ok?"ok":"bad"; head=p.ok?'Benar +5':(p.answered?'Salah':'Kosong'); }
+  var best=(q.sub==="TKP")?q.s.indexOf(5):LETTERS.indexOf(q.k);
+  var rows=q.o.map(function(t,j){
+    var c="orow", bd="";
+    if(q.sub==="TKP"){ var sc=q.s[j]; c+=(sc===5?" key":(sc===4?" s4":" low")); bd='<span class="bdg'+(sc===5?' g':(sc===4?' a':''))+'">Skor '+sc+'</span>'; }
+    else if(j===best){ c+=" key"; bd='<span class="bdg g">Kunci</span>'; }
+    if(p.answered&&a===j){ c+=" you"; bd+=' <span class="bdg b" style="'+(j===best?'background:var(--good)':'')+'">Pilihanmu</span>'; }
+    return '<div class="'+c+'"><span class="lt">'+LETTERS[j]+'</span><div><div class="ot">'+esc(t)+'</div><div class="badges">'+bd+'</div><div class="rs">'+esc(q.opt[j])+'</div></div></div>';
+  }).join("");
+  return '<details class="rv s-'+q.sub+'" data-ok="'+(p.ok?1:0)+'"><summary><span class="num">'+(i+1)+'</span><span class="sumtxt"><b>'+esc(q.topic)+'</b><span>'+q.sub+' &middot; '+Math.round(S.times[i]||0)+' dtk</span></span><span class="vd '+cls+'">'+head+'</span><span class="chev" aria-hidden="true"></span></summary>'+
+   '<div class="rvbody">'+
+    '<p class="qtext">'+esc(q.q)+'</p>'+
+    '<div class="blk core">'+ico("target")+'<div><h4>Yang ditanya</h4><p>'+esc(q.core)+'</p></div></div>'+
+    '<div class="stack" style="gap:10px">'+rows+'</div>'+
+    '<div class="blk kon">'+ico("book")+'<div><h4>Konsep di baliknya</h4><ul class="dots">'+q.kon.map(function(x){return '<li>'+esc(x)+'</li>';}).join("")+'</ul></div></div>'+
+    '<div class="blk fast">'+ico("zap")+'<div><h4>Cara cepat</h4><ol class="steps">'+q.fast.map(function(x){return '<li>'+esc(x)+'</li>';}).join("")+'</ol></div></div>'+
+    '<div class="blk trap">'+ico("alert")+'<div><h4>Awas jebakan</h4><p>'+esc(q.trap)+'</p></div></div>'+
+    '<div class="blk mn">'+ico("star")+'<div><h4>Jembatan keledai</h4><p>'+esc(q.mn)+'</p></div></div>'+
+   '</div></details>';
+}
+function renderResult(auto){
+  var r=scoreAll(S.ans), sc=r.scaled, app=$("app");
+  var used=Math.min(TOTAL_SEC,Math.round((S.endedAt-S.start)/1000));
+  var wrongIdx=Q.map(function(q,i){return i;}).filter(function(i){return !r.per[i].ok;});
+  var tkpHit=bySub("TKP").filter(function(i){return r.per[i].ok;}).length;
+
+  var boxes=["TWK","TIU","TKP"].map(function(s){
+    var st=statusOf(sc[s],PG[s]);
+    var pctv=Math.min(100,sc[s]/MAXFULL[s]*100), pgp=PG[s]/MAXFULL[s]*100;
+    var detail=(s==="TKP")?('Tepat sasaran (skor 5): '+tkpHit+' dari '+N[s]+'. Poin mentah '+r.raw[s]+' dari '+(N[s]*5)+'. Target pribadi: '+TKP_TARGET+'+ ('+(sc.TKP>=TKP_TARGET?'tercapai':'belum tercapai')+').'):('Benar '+r.correct[s]+' dari '+N[s]+' soal.');
+    return '<div class="scorebox s-'+s+'"><div class="row between"><b>'+s+'</b><span class="pill '+st+'">'+statusLabel(st)+'</span></div>'+
+      '<div class="big">'+sc[s]+'<span class="small muted"> / '+MAXFULL[s]+'</span></div>'+
+      '<div class="meter" role="img" aria-label="'+s+' '+sc[s]+' dari '+MAXFULL[s]+', passing grade '+PG[s]+'"><i style="width:'+pctv+'%"></i><u style="left:'+pgp+'%"></u></div>'+
+      '<div class="small muted">Garis hitam = passing grade '+PG[s]+'. '+detail+'</div></div>';
+  }).join("");
+
+  var groups={}, gkeys=[];
+  wrongIdx.forEach(function(i){ var q=Q[i], k=q.sub+"|"+mainOf(q); if(!groups[k]){groups[k]={sub:q.sub,main:mainOf(q),nums:[],items:[]}; gkeys.push(k);} groups[k].nums.push(i+1); groups[k].items.push(i); });
+  gkeys.sort(function(a,b){ return groups[b].nums.length-groups[a].nums.length; });
+  var fam={}, fkeys=[];
+  wrongIdx.forEach(function(i){ var f=FAM[i]; if(!fam[f]){fam[f]=[];fkeys.push(f);} fam[f].push(i+1); });
+  fkeys.sort(function(a,b){ return fam[b].length-fam[a].length; });
+
+  /* A */
+  var aHtml=["TWK","TIU","TKP"].map(function(s){
+    var gs=gkeys.filter(function(k){return groups[k].sub===s;});
+    var nW=wrongIdx.filter(function(i){return Q[i].sub===s;}).length;
+    var head='<h3><span class="tag s-'+s+'">'+s+'</span> '+nW+' dari '+N[s]+(s==="TKP"?' meleset (skor 4 ke bawah)':' salah atau kosong')+'</h3>';
+    if(!gs.length) return '<div class="stack" style="gap:6px">'+head+'<p class="muted">Semua tepat.</p></div>';
+    return '<div class="stack" style="gap:6px">'+head+'<ul class="dots s-'+s+'">'+gs.map(function(k){
+      var g=groups[k], extra="";
+      if(s==="TKP") extra=' (skor kamu: '+g.items.map(function(i){return r.per[i].answered?r.per[i].pts:0;}).join(", ")+')';
+      return '<li><b>'+esc(g.main)+'</b>: salah '+g.nums.length+', no. '+g.nums.join(", ")+extra+'</li>';
+    }).join("")+'</ul></div>';
+  }).join("");
+  var rep=fkeys.filter(function(f){return fam[f].length>=2;});
+  var patHtml;
+  if(!wrongIdx.length) patHtml='<p>Tidak ada kesalahan, jadi tidak ada pola jebakan. Naikkan kesulitan pada sesi berikutnya.</p>';
+  else if(rep.length) patHtml='<p><b>Pola jebakan yang berulang:</b></p><ul class="dots" style="margin-top:8px">'+rep.map(function(f){return '<li><b>'+FAMT[f].n+'</b> ('+fam[f].length+' soal, no. '+fam[f].join(", ")+'). '+esc(FAMT[f].d)+'</li>';}).join("")+'</ul>'+
+      (fkeys.length>rep.length?'<p class="small muted" style="margin-top:10px">Jebakan yang muncul sekali: '+fkeys.filter(function(f){return fam[f].length<2;}).map(function(f){return FAMT[f].n+' (no. '+fam[f].join(", ")+')';}).join("; ")+'.</p>':'');
+  else patHtml='<p>Belum ada pola berulang: tiap jenis jebakan baru muncul sekali ('+fkeys.map(function(f){return FAMT[f].n+' no. '+fam[f].join(", ");}).join("; ")+'). Satu sesi berisi 8 sampai 9 soal per subtes terlalu sedikit untuk menyimpulkan kebiasaan. Polanya baru jelas setelah beberapa sesi.</p>';
+
+  /* B */
+  var bHtml=!wrongIdx.length?'<p class="muted">Tidak ada nomor yang salah.</p>':wrongIdx.map(function(i){
+    var q=Q[i], p=r.per[i], a=S.ans[i], best=(q.sub==="TKP")?q.s.indexOf(5):LETTERS.indexOf(q.k);
+    var you=p.answered?('Pilihanmu: <b>'+LETTERS[a]+'</b>'+(q.sub==="TKP"?' (skor '+q.s[a]+')':'')):'Tidak dijawab';
+    return '<div class="bedah s-'+q.sub+'"><div class="row between"><span><span class="tag">'+q.sub+'</span> <b>No. '+(i+1)+'</b> <span class="small muted">'+esc(q.topic)+'</span></span><span class="small">'+you+' &rarr; seharusnya <b>'+LETTERS[best]+'</b></span></div>'+
+      '<p class="small muted">'+esc(q.core)+'</p><ul class="dots">'+q.kon.map(function(x){return '<li>'+esc(x)+'</li>';}).join("")+'</ul></div>';
+  }).join("");
+
+  /* C */
+  var cHtml;
+  if(!wrongIdx.length) cHtml='<p class="muted">Tidak ada yang perlu diperbaiki.</p>';
+  else {
+    cHtml='<div class="stack" style="gap:12px">'+fkeys.map(function(f){return '<div class="blk fast">'+ico("zap")+'<div><h4>'+FAMT[f].n+' (no. '+fam[f].join(", ")+')</h4><p>'+esc(FAMT[f].t)+'</p></div></div>';}).join("")+'</div>'+
+      '<h3 style="margin-top:6px">Cara cepat per nomor</h3>'+
+      '<div class="stack" style="gap:10px">'+wrongIdx.map(function(i){return '<div class="blk kon s-'+Q[i].sub+'">'+ico("zap")+'<div><h4>No. '+(i+1)+' &middot; '+esc(Q[i].topic)+'</h4><ol class="steps">'+Q[i].fast.map(function(x){return '<li>'+esc(x)+'</li>';}).join("")+'</ol></div></div>';}).join("")+'</div>';
+  }
+
+  /* D */
+  var dReq=gkeys.map(function(k){ var g=groups[k];
+    return {txt:'Buatkan 5 soal latihan tambahan hanya untuk subtes '+g.sub+', sub-materi '+g.main+' (level HOTS, standar KepmenPANRB 321/2024), format kuis interaktif. Setelah selesai, beri evaluasi urut A (peta kelemahan), B (bedah konsep), C (tips dan cara cepat).', lab:g.sub+' / '+g.main+' ('+g.nums.length+' salah)'}; });
+  var dHtml=!dReq.length?'<p class="muted">Tidak ada sub-materi lemah. Usul: lanjut ke subtes berikutnya atau naikkan tingkat kesulitan.</p>':
+    '<p class="small muted">Tempel permintaan di bawah ke chat untuk mendapat 5 soal tambahan khusus sub-materi itu. Pindah topik setelah sub-materi tersebut benar-benar dikuasai.</p>'+
+    dReq.map(function(x,n){ return '<div class="stack" style="gap:8px;border-top:1px solid var(--line);padding-top:12px"><b>'+esc(x.lab)+'</b><textarea readonly id="dq'+n+'" style="min-height:96px">'+esc(x.txt)+'</textarea><div class="row"><button class="btn" data-dq="'+n+'">Salin permintaan</button><span class="small muted" id="dm'+n+'" role="status"></span></div></div>'; }).join("");
+
+  var pace=["TWK","TIU","TKP"].map(function(s){
+    var idxs=bySub(s), tot=0; idxs.forEach(function(i){tot+=(S.times[i]||0);});
+    var avg=tot/idxs.length, cls=avg>PACE*1.3?"low":(avg>PACE?"near":"ok");
+    return '<tr><td>'+s+'</td><td>'+Math.round(avg)+' dtk</td><td><span class="pill '+cls+'">'+(cls==="ok"?"Sesuai tempo":(cls==="near"?"Agak lambat":"Terlalu lambat"))+'</span></td></tr>';
+  }).join("");
+  var slow=Q.map(function(q,i){return {i:i,t:S.times[i]||0};}).sort(function(a,b){return b.t-a.t;}).slice(0,3)
+    .map(function(x){ return 'No. '+(x.i+1)+' ('+Q[x.i].sub+', '+Math.round(x.t)+' dtk)'; }).join(", ");
+
+  var rv=Q.map(function(q,i){ return reviewCard(i,r); }).join("");
+  var summary=buildSummary(r,used,groups,gkeys,fam,fkeys,wrongIdx,tkpHit);
+
+  app.innerHTML=
+  '<div class="wrap stack">'+
+   '<div class="row between"><span class="tag">HASIL DIAGNOSTIK</span>'+fsCtl()+'</div>'+
+   '<div class="hero stack" style="gap:8px"><h1>Total estimasi '+sc.total+' dari 550</h1>'+
+   '<p>Waktu terpakai '+fmt(used)+' dari 22:00'+(auto?' (waktu habis, jawaban terkunci otomatis)':'')+'. Skor memakai skala 110 soal: poin mentah dibagi poin maksimum paket lalu dikali nilai maksimum SKD. Dengan hanya 8 sampai 9 soal per subtes, margin kesalahan besar. Pakai sebagai arah, bukan vonis.</p></div>'+
+   '<div class="grid3">'+boxes+'</div>'+
+   '<div class="card stack"><div class="sec-h"><span class="letter">A</span><h2>Peta analisis kelemahan</h2></div>'+aHtml+'<div class="card" style="background:var(--bg)">'+patHtml+'</div></div>'+
+   '<div class="card stack"><div class="sec-h"><span class="letter">B</span><h2>Bedah konsep dasar (hanya nomor yang salah)</h2></div>'+bHtml+'</div>'+
+   '<div class="card stack"><div class="sec-h"><span class="letter">C</span><h2>Tips dan cara cepat</h2></div>'+cHtml+'</div>'+
+   '<div class="card stack"><div class="sec-h"><span class="letter">D</span><h2>Tindak lanjut: 5 soal tambahan</h2></div>'+dHtml+'</div>'+
+   '<div class="card stack"><h2>Kecepatan</h2><p class="small muted">Tempo target sekitar '+Math.round(PACE)+' detik per soal. Soal paling lama: '+slow+'.</p>'+
+    '<div class="scroll-x"><table><thead><tr><th>Subtes</th><th>Rata-rata per soal</th><th>Status</th></tr></thead><tbody>'+pace+'</tbody></table></div></div>'+
+   '<div class="card stack"><h2>Kirim ke Claude untuk jadwal mingguan</h2><p class="small muted">Salin ringkasan ini lalu tempel ke chat. Jadwal latihan disusun dari data tersebut.</p>'+
+    '<textarea id="sum" readonly>'+esc(summary)+'</textarea>'+
+    '<div class="row"><button class="btn primary" id="bCopy">Salin ringkasan</button><span class="small muted" id="cMsg" role="status"></span></div></div>'+
+   '<div id="trk"></div>'+
+   '<div class="stack"><div class="row between"><h2>Pembahasan lengkap 25 soal</h2><div class="row"><button class="btn" id="fAll">Semua</button><button class="btn" id="fWrong">Yang meleset</button><button class="btn" id="oAll">Buka semua</button><button class="btn" id="cAll">Tutup semua</button></div></div>'+
+    '<p class="small muted">Ketuk satu soal untuk membuka pembahasan: alasan tiap opsi, konsep, cara cepat, jebakan, dan jembatan keledai. Berlaku untuk soal yang benar maupun salah.</p>'+
+    '<div class="stack" id="rvList">'+rv+'</div></div>'+
+   '<div class="row"><button class="btn" id="bAgain">Kembali ke awal</button></div>'+
+  '</div>';
+  $("bCopy").onclick=function(){ copyText($("sum").value,$("cMsg")); };
+  app.onclick=function(e){ var b=e.target.closest("button[data-dq]"); if(!b) return; var n=b.getAttribute("data-dq"); copyText($("dq"+n).value,$("dm"+n)); };
+  $("fAll").onclick=function(){ filterRv(false); }; $("fWrong").onclick=function(){ filterRv(true); };
+  $("oAll").onclick=function(){ toggleAll(true); }; $("cAll").onclick=function(){ toggleAll(false); };
+  $("bAgain").onclick=function(){ lsDel(LS_SESS); S=null; renderIntro(); window.scrollTo(0,0); };
+  renderTracker("trk"); applyFs();
+  window.scrollTo(0,0);
+}
+function filterRv(onlyWrong){
+  Array.prototype.forEach.call(document.querySelectorAll("#rvList details.rv"),function(el){
+    el.classList.toggle("hide",onlyWrong&&el.getAttribute("data-ok")==="1");
+  });
+}
+function toggleAll(open){
+  Array.prototype.forEach.call(document.querySelectorAll("#rvList details.rv"),function(el){
+    if(open&&!el.classList.contains("hide")) el.setAttribute("open",""); else if(!open) el.removeAttribute("open");
+  });
+}
+function buildSummary(r,used,groups,gkeys,fam,fkeys,wrongIdx,tkpHit){
+  var sc=r.scaled, L=[];
+  L.push("HASIL DIAGNOSTIK SKD (25 soal campuran, 22 menit)");
+  L.push("Waktu terpakai: "+fmt(used)+(S.auto?" (habis)":""));
+  L.push("Estimasi skala 110 soal: TWK "+sc.TWK+"/150 (PG 65), TIU "+sc.TIU+"/175 (PG 80), TKP "+sc.TKP+"/225 (PG 166, target pribadi "+TKP_TARGET+"+), Total "+sc.total+"/550");
+  L.push("Mentah: TWK benar "+r.correct.TWK+"/8, TIU benar "+r.correct.TIU+"/9, TKP poin "+r.raw.TKP+"/40, TKP tepat sasaran (skor 5) "+tkpHit+"/8");
+  L.push("Rata-rata detik per soal: "+["TWK","TIU","TKP"].map(function(s){var t=0;bySub(s).forEach(function(i){t+=(S.times[i]||0);});return s+" "+Math.round(t/N[s]);}).join(", ")+" (target ~"+Math.round(PACE)+")");
+  L.push("Sub-materi meleset: "+(gkeys.length?gkeys.map(function(k){var g=groups[k];return g.sub+" / "+g.main+" (salah "+g.nums.length+": no. "+g.nums.join(",")+")";}).join("; "):"-"));
+  L.push("Jenis jebakan: "+(fkeys.length?fkeys.map(function(f){return FAMT[f].n+" (no. "+fam[f].join(",")+")";}).join("; "):"-"));
+  L.push("Soal tidak dijawab: "+(Q.length-Object.keys(S.ans).length));
+  L.push("Aturan: 1 subtes per sesi latihan, TKP tepat sasaran hanya skor 5, evaluasi A-B-C lalu tawaran 5 soal tambahan.");
+  L.push("Waktu belajar: 1-1,5 jam malam hari kerja, 2,5-3 jam akhir pekan. Ujian perkiraan Januari 2027.");
+  return L.join("\n");
+}
+
+/* ===== TRACKER ===== */
+function renderTracker(id){
+  var el=$(id); if(!el) return;
+  var h=lsGet(LS_HIST)||[];
+  var rows=h.slice().reverse().map(function(x,ri){
+    var idx=h.length-1-ri, tot=x.TWK+x.TIU+x.TKP;
+    function c(s){ var st=statusOf(x[s],PG[s]); return '<td><span class="pill '+st+'">'+x[s]+'</span></td>'; }
+    var d=new Date(x.t), ds=d.toLocaleDateString("id-ID",{day:"2-digit",month:"short"});
+    return '<tr><td>'+ds+'</td><td>'+esc(x.label)+(x.est?' <span class="small muted">(skala estimasi)</span>':'')+'</td>'+c("TWK")+c("TIU")+c("TKP")+'<td><b>'+tot+'</b></td><td><button class="btn" data-del="'+idx+'" aria-label="Hapus baris">Hapus</button></td></tr>';
+  }).join("");
+  el.innerHTML='<div class="card stack"><h2>Tracker skor</h2>'+
+   '<p class="small muted">Warna mengikuti passing grade 65 / 80 / 166: hijau di atas PG, kuning dalam 10% di bawah PG (batas ini saya tetapkan sendiri), merah lebih rendah. Riwayat tersimpan di browser ini saja, jadi salin ringkasan bila ingin dibawa ke perangkat lain.</p>'+
+   (rows?'<div class="scroll-x"><table><thead><tr><th>Tgl</th><th>Tes</th><th>TWK</th><th>TIU</th><th>TKP</th><th>Total</th><th></th></tr></thead><tbody>'+rows+'</tbody></table></div>':'<p class="muted">Belum ada data. Hasil diagnostik masuk otomatis. Hasil tryout penuh bisa ditambahkan di bawah.</p>')+
+   '<form id="addForm" class="stack" style="gap:12px"><h3>Tambah hasil tryout penuh (110 soal)</h3>'+
+    '<label for="fl">Nama tryout<input type="text" id="fl" placeholder="mis. TO 1 CPNS" maxlength="40"></label>'+
+    '<div class="grid3"><label for="fw">TWK (0-150)<input type="number" id="fw" min="0" max="150" inputmode="numeric"></label>'+
+    '<label for="fi">TIU (0-175)<input type="number" id="fi" min="0" max="175" inputmode="numeric"></label>'+
+    '<label for="fk">TKP (0-225)<input type="number" id="fk" min="0" max="225" inputmode="numeric"></label></div>'+
+    '<div class="row"><button class="btn primary" type="submit">Simpan ke tracker</button><span class="small" id="fErr" role="alert" style="color:var(--bad)"></span></div></form></div>';
+  el.onclick=function(e){ var b=e.target.closest("button[data-del]"); if(!b) return; var hh=lsGet(LS_HIST)||[]; hh.splice(parseInt(b.getAttribute("data-del"),10),1); lsSet(LS_HIST,hh); renderTracker(id); };
+  $("addForm").onsubmit=function(e){
+    e.preventDefault();
+    var w=parseInt($("fw").value,10), i=parseInt($("fi").value,10), k=parseInt($("fk").value,10), lb=$("fl").value.trim()||"Tryout penuh";
+    var err=$("fErr");
+    if(isNaN(w)||isNaN(i)||isNaN(k)){ err.textContent="Isi ketiga skor dengan angka."; return; }
+    if(w<0||w>150||i<0||i>175||k<0||k>225){ err.textContent="Skor di luar rentang: TWK 0-150, TIU 0-175, TKP 0-225."; return; }
+    var hh=lsGet(LS_HIST)||[]; hh.push({t:Date.now(),label:lb,TWK:w,TIU:i,TKP:k,est:false}); lsSet(LS_HIST,hh); renderTracker(id);
+  };
+}
+
+/* ===== MULAI ===== */
+(function init(){
+  applyFs();
+  var sess=lsGet(LS_SESS);
+  if(sess&&!sess.done&&sess.deadline>Date.now()){ renderIntro(); }
+  else if(sess&&!sess.done&&sess.deadline<=Date.now()){ S=sess; S.done=true; S.auto=true; S.endedAt=S.deadline; save();
+    var h=lsGet(LS_HIST)||[]; var r=scoreAll(S.ans); h.push({t:S.endedAt,label:"Diagnostik 25 soal (estimasi)",TWK:r.scaled.TWK,TIU:r.scaled.TIU,TKP:r.scaled.TKP,est:true}); lsSet(LS_HIST,h); renderResult(true); }
+  else { renderIntro(); }
+})();
+</script>
+</body>
+</html>
