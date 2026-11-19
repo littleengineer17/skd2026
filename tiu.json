@@ -341,5 +341,671 @@
   ],
   "mn": "Jarak sama, kecepatan beda: pakai harmonik, bukan rata-rata biasa.",
   "trap": "Angka 50 terasa alami karena merupakan 'tengah-tengah', tetapi itu jebakan."
+ },
+ {
+  "id": "tiu-010",
+  "sub": "TIU",
+  "topic": "Penalaran analitis: urutan jadwal",
+  "fam": "L",
+  "status": "draf",
+  "source": "orisinal; pola dari e-book Bank Soal TIU (ditulis ulang)",
+  "q": "Lima pegawai (Rina, Sandi, Tono, Umar, Vina) masing-masing presentasi satu kali, satu orang per hari, dari Senin sampai Jumat.\n- Sandi presentasi sebelum Tono.\n- Umar presentasi tepat sehari setelah Vina.\n- Rina tidak presentasi pada hari Senin maupun Jumat.\n- Tono presentasi tepat sehari setelah Rina.\n- Vina presentasi sebelum Sandi.\nPegawai yang presentasi pada hari Rabu adalah ....",
+  "o": [
+   "Rina",
+   "Sandi",
+   "Tono",
+   "Umar",
+   "Vina"
+  ],
+  "k": "B",
+  "core": "Yang ditanya: siapa yang tampil pada hari ke-3 setelah semua syarat dipenuhi.",
+  "kon": [
+   "Pasangan yang harus menempel dianggap satu blok: Vina-Umar (Umar tepat setelah Vina) dan Rina-Tono (Tono tepat setelah Rina).",
+   "Rantai Vina sebelum Sandi sebelum Tono berarti Tono harus tampil belakangan, minimal hari ke-4.",
+   "Blok Rina-Tono di Rabu-Kamis tidak muat, karena Vina, Umar, dan Sandi butuh tiga hari sebelum Tono. Jadi blok itu di Kamis-Jumat dan sisanya mengisi Senin sampai Rabu."
+  ],
+  "opt": [
+   "Rina presentasi hari Kamis, bukan Rabu.",
+   "Benar. Urutan akhirnya Vina (Senin), Umar (Selasa), Sandi (Rabu), Rina (Kamis), Tono (Jumat).",
+   "Tono presentasi hari Jumat, tepat setelah Rina.",
+   "Umar presentasi hari Selasa, tepat setelah Vina.",
+   "Vina presentasi hari Senin, paling awal."
+  ],
+  "fast": [
+   "Tandai dua blok yang menempel: Vina-Umar dan Rina-Tono.",
+   "Cari syarat yang memaksa: Vina sebelum Sandi sebelum Tono, jadi Tono hari ke-4 atau ke-5.",
+   "Coba blok Rina-Tono di akhir pekan, lalu isi sisa hari berurutan sesuai syarat."
+  ],
+  "mn": "Blok dulu, urutkan kemudian.",
+  "trap": "Syarat 'Rina bukan Senin atau Jumat' terlihat membuka banyak kemungkinan. Jangan menebak: uji setiap kemungkinan terhadap semua syarat."
+ },
+ {
+  "id": "tiu-011",
+  "sub": "TIU",
+  "topic": "Penalaran analitis: seleksi bersyarat",
+  "fam": "L",
+  "status": "draf",
+  "source": "orisinal; pola dari e-book Bank Soal TIU (ditulis ulang)",
+  "q": "Sebuah unit akan memilih tepat tiga dari enam modul pelatihan (P, Q, R, S, T, U) dengan ketentuan:\n- Jika P dipilih, maka Q tidak dipilih.\n- R dan S dipilih bersama-sama atau tidak dipilih sama sekali.\n- T hanya boleh dipilih apabila U juga dipilih.\nJika modul Q dipilih, kombinasi tiga modul yang memenuhi semua ketentuan adalah ....",
+  "o": [
+   "Q, R, U",
+   "P, Q, S",
+   "Q, S, T",
+   "Q, T, U",
+   "Q, R, T"
+  ],
+  "k": "D",
+  "core": "Yang ditanya: satu kombinasi tiga modul yang lolos semua syarat, dengan Q sudah dipilih.",
+  "kon": [
+   "Ubah syarat jadi aturan pendek: P berarti bukan Q; R dan S selalu berpasangan; T berarti harus ada U.",
+   "Karena Q dipilih, P otomatis gugur.",
+   "Hanya ada dua kombinasi sah, yaitu Q-R-S dan Q-T-U. Soal hanya menyediakan salah satunya."
+  ],
+  "opt": [
+   "R dipilih tanpa S. Melanggar ketentuan kedua.",
+   "P dan Q dipilih bersamaan, juga S tanpa R. Melanggar ketentuan pertama dan kedua.",
+   "S tanpa R dan T tanpa U. Melanggar ketentuan kedua dan ketiga.",
+   "Benar. Q tidak bersama P, tidak ada R atau S yang berdiri sendiri, dan T ditemani U.",
+   "R tanpa S dan T tanpa U. Melanggar ketentuan kedua dan ketiga."
+  ],
+  "fast": [
+   "Tulis ringkas: P tidak bersama Q, R sama dengan S, T butuh U.",
+   "Uji tiap opsi dan coret pada pelanggaran pertama yang ditemukan.",
+   "Periksa ulang opsi yang tersisa terhadap ketiga syarat."
+  ],
+  "mn": "Syarat pasangan: R-S kembar, T butuh U, P menolak Q.",
+  "trap": "Tiap pengecoh memenuhi satu syarat tetapi melanggar syarat lain. Cek ketiga syarat, bukan satu."
+ },
+ {
+  "id": "tiu-012",
+  "sub": "TIU",
+  "topic": "Penalaran analitis: penempatan posisi",
+  "fam": "L",
+  "status": "draf",
+  "source": "orisinal; pola dari e-book Bank Soal TIU (ditulis ulang)",
+  "q": "Empat petugas (Ega, Fani, Gita, Hadi) menempati empat loket bernomor 1 sampai 4 dari kiri ke kanan, satu orang per loket.\n- Ega tidak berada di loket 1 maupun loket 4.\n- Nomor loket Fani lebih besar daripada nomor loket Gita.\n- Hadi tidak bersebelahan dengan Ega.\nJika Hadi berada di loket 1, pernyataan yang pasti benar adalah ....",
+  "o": [
+   "Gita berada di loket 3",
+   "Fani berada di loket 2",
+   "Gita bersebelahan dengan Fani",
+   "Ega berada di loket 2",
+   "Ega bersebelahan dengan Fani"
+  ],
+  "k": "E",
+  "core": "Yang ditanya: pernyataan yang pasti benar setelah Hadi dipastikan di loket 1.",
+  "kon": [
+   "Mulai dari yang paling terkunci: Hadi di loket 1.",
+   "Ega hanya boleh di loket 2 atau 3, dan loket 2 bersebelahan dengan Hadi, jadi Ega di loket 3.",
+   "Sisa loket 2 dan 4 untuk Gita dan Fani. Karena nomor Fani lebih besar, Gita di loket 2 dan Fani di loket 4."
+  ],
+  "opt": [
+   "Gita berada di loket 2.",
+   "Fani berada di loket 4.",
+   "Gita di loket 2 dan Fani di loket 4, tidak bersebelahan.",
+   "Loket 2 bersebelahan dengan Hadi di loket 1, sehingga Ega tidak boleh di sana. Ega di loket 3.",
+   "Benar. Urutan akhirnya Hadi (1), Gita (2), Ega (3), Fani (4), sehingga Ega dan Fani bersebelahan."
+  ],
+  "fast": [
+   "Gambar empat kotak bernomor.",
+   "Isi kotak yang pasti, lalu coret kemungkinan yang melanggar syarat tidak bersebelahan.",
+   "Tulis urutan akhir dulu, baru cocokkan ke opsi."
+  ],
+  "mn": "Isi yang pasti dulu, sisanya mengikuti.",
+  "trap": "Opsi menyebut nama dan nomor yang benar-benar ada di barisan tetapi tertukar. Pastikan nomor loketnya, bukan hanya namanya."
+ },
+ {
+  "id": "tiu-013",
+  "sub": "TIU",
+  "topic": "Penalaran analitis: perbandingan peringkat",
+  "fam": "L",
+  "status": "draf",
+  "source": "orisinal; pola dari e-book Bank Soal TIU (ditulis ulang)",
+  "q": "Lima atlet (Dewi, Eko, Fajar, Gani, Hana) diukur tinggi badannya dan tidak ada yang sama tinggi.\n- Dewi lebih tinggi daripada Eko.\n- Eko lebih tinggi daripada Fajar.\n- Hana lebih tinggi daripada Eko.\n- Fajar lebih tinggi daripada Gani.\nPernyataan yang pasti benar adalah ....",
+  "o": [
+   "Dewi lebih tinggi daripada Hana",
+   "Hana adalah atlet tertinggi",
+   "Eko adalah atlet tertinggi ketiga",
+   "Fajar adalah atlet tertinggi ketiga",
+   "Dewi adalah atlet tertinggi kedua"
+  ],
+  "k": "C",
+  "core": "Yang ditanya: kesimpulan yang berlaku untuk semua susunan yang mungkin.",
+  "kon": [
+   "Rangkai perbandingan menjadi satu rantai: Gani < Fajar < Eko < (Dewi dan Hana).",
+   "Dewi dan Hana sama-sama di atas Eko tetapi tidak dibandingkan satu sama lain, sehingga urutan keduanya bebas.",
+   "Pernyataan yang pasti hanya yang benar untuk kedua urutan itu: Eko selalu peringkat tiga."
+  ],
+  "opt": [
+   "Tidak ada informasi yang membandingkan Dewi dan Hana.",
+   "Bisa saja Dewi lebih tinggi daripada Hana. Tidak pasti.",
+   "Benar. Di atas Eko ada Dewi dan Hana, di bawahnya ada Fajar dan Gani, sehingga Eko pasti peringkat tiga.",
+   "Fajar berada di bawah Eko, Dewi, dan Hana, jadi peringkat empat.",
+   "Dewi bisa peringkat satu atau dua. Tidak pasti."
+  ],
+  "fast": [
+   "Gambar rantai dari yang terpendek ke tertinggi.",
+   "Tandai bagian yang bercabang (Dewi dan Hana).",
+   "Pilih pernyataan yang tidak bergantung pada urutan cabang itu."
+  ],
+  "mn": "Tidak dibandingkan berarti tidak pasti.",
+  "trap": "Opsi tentang Dewi dan Hana terasa wajar, tetapi soal tidak pernah membandingkan keduanya."
+ },
+ {
+  "id": "tiu-014",
+  "sub": "TIU",
+  "topic": "Penalaran analitis: pernyataan benar dan salah",
+  "fam": "L",
+  "status": "draf",
+  "source": "orisinal; pola dari e-book Bank Soal TIU (ditulis ulang)",
+  "q": "Satu berkas hilang dari ruang arsip dan tepat satu dari tiga pegawai (Ani, Bimo, Cinta) yang mengambilnya. Mereka memberi pernyataan:\n- Ani: \"Bimo yang mengambil berkas itu.\"\n- Bimo: \"Saya tidak mengambil berkas itu.\"\n- Cinta: \"Ani bukan orang yang mengambil berkas itu.\"\nJika tepat satu dari ketiga pernyataan tersebut benar, siapa yang mengambil berkas?",
+  "o": [
+   "Ani",
+   "Bimo",
+   "Cinta",
+   "Ani atau Bimo",
+   "Tidak dapat ditentukan"
+  ],
+  "k": "A",
+  "core": "Yang ditanya: pelaku yang membuat jumlah pernyataan benar tepat satu.",
+  "kon": [
+   "Metode andai-andai: anggap satu orang pelakunya, lalu hitung berapa pernyataan yang benar.",
+   "Hanya pelaku yang membuat jumlah benar tepat satu yang diterima.",
+   "Cukup uji tiga kemungkinan. Dua di antaranya menghasilkan dua pernyataan benar, sehingga gugur."
+  ],
+  "opt": [
+   "Benar. Jika Ani pelakunya: pernyataan Ani salah, Bimo benar, Cinta salah. Tepat satu yang benar.",
+   "Jika Bimo pelakunya, pernyataan Ani dan Cinta sama-sama benar. Berarti dua yang benar.",
+   "Jika Cinta pelakunya, pernyataan Bimo dan Cinta sama-sama benar. Berarti dua yang benar.",
+   "Kedua kemungkinan tidak bisa sekaligus lolos. Hanya satu yang konsisten.",
+   "Dengan syarat tepat satu pernyataan benar, pelakunya bisa ditentukan."
+  ],
+  "fast": [
+   "Buat tabel kecil tiga baris (kemungkinan pelaku) dan tiga kolom (pernyataan).",
+   "Isi benar atau salah untuk tiap sel.",
+   "Pilih baris yang jumlah benarnya tepat satu."
+  ],
+  "mn": "Andaikan pelakunya, hitung yang jujur.",
+  "trap": "Pernyataan bernada negatif ('bukan Ani') mudah terbalik saat diuji. Uji pelan-pelan untuk tiap kemungkinan."
+ },
+ {
+  "id": "tiu-015",
+  "sub": "TIU",
+  "topic": "Penalaran logis: silogisme kategorik",
+  "fam": "L",
+  "status": "draf",
+  "source": "orisinal; pola dari e-book Bank Soal TIU (ditulis ulang)",
+  "q": "Premis 1: Semua pelatihan daring memberikan sertifikat.\nPremis 2: Sebagian pelatihan daring tidak berbayar.\nKesimpulan yang pasti benar adalah ....",
+  "o": [
+   "Semua pelatihan yang tidak berbayar tidak memberikan sertifikat",
+   "Sebagian pelatihan tidak berbayar memberikan sertifikat",
+   "Sebagian pelatihan daring tidak memberikan sertifikat",
+   "Semua pelatihan yang memberikan sertifikat adalah pelatihan daring",
+   "Tidak ada pelatihan berbayar yang memberikan sertifikat"
+  ],
+  "k": "B",
+  "core": "Yang ditanya: kesimpulan yang tidak mungkin salah jika kedua premis benar.",
+  "kon": [
+   "'Semua A adalah B' tidak sama dengan 'Semua B adalah A'. Jangan membalik arah.",
+   "'Sebagian A adalah C' menjamin ada anggota A yang juga C. Karena semua A adalah B, anggota itu juga B.",
+   "Maka sebagian C adalah B, yaitu sebagian pelatihan tidak berbayar memberi sertifikat."
+  ],
+  "opt": [
+   "Bertentangan dengan Premis 1: pelatihan daring yang tidak berbayar tetap memberi sertifikat.",
+   "Benar. Pelatihan daring yang tidak berbayar pasti ada, dan semuanya memberikan sertifikat.",
+   "Bertentangan dengan Premis 1: semua pelatihan daring memberi sertifikat.",
+   "Kebalikan Premis 1. Pelatihan luring juga mungkin memberi sertifikat.",
+   "Tidak ada dasarnya di premis. Premis tidak membahas pelatihan berbayar."
+  ],
+  "fast": [
+   "Gambar lingkaran daring di dalam lingkaran bersertifikat.",
+   "Letakkan titik 'tidak berbayar' di dalam lingkaran daring.",
+   "Titik itu otomatis di dalam lingkaran bersertifikat."
+  ],
+  "mn": "Yang di dalam lingkaran kecil pasti di dalam lingkaran besar.",
+  "trap": "Kebalikan premis ('semua yang bersertifikat daring') terdengar wajar tetapi tidak dijamin."
+ },
+ {
+  "id": "tiu-016",
+  "sub": "TIU",
+  "topic": "Penalaran logis: implikasi berantai",
+  "fam": "L",
+  "status": "draf",
+  "source": "orisinal; pola dari e-book Bank Soal TIU (ditulis ulang)",
+  "q": "Premis 1: Jika anggaran disetujui, maka proyek dimulai.\nPremis 2: Jika proyek dimulai, maka tim pelaksana dibentuk.\nPremis 3: Tim pelaksana belum dibentuk.\nKesimpulan yang pasti benar adalah ....",
+  "o": [
+   "Anggaran belum disetujui dan proyek belum dimulai",
+   "Anggaran disetujui tetapi proyek belum dimulai",
+   "Proyek dimulai tetapi anggaran belum disetujui",
+   "Anggaran belum disetujui, tetapi proyek sudah dimulai",
+   "Tim pelaksana dibentuk setelah anggaran disetujui"
+  ],
+  "k": "A",
+  "core": "Yang ditanya: kesimpulan dari rangkaian 'jika-maka' bila akhir rantainya tidak terjadi.",
+  "kon": [
+   "Dua implikasi bersambung membentuk rantai: anggaran disetujui, proyek dimulai, tim dibentuk.",
+   "Jika ujung rantai tidak terjadi (tim belum ada), semua mata rantai sebelumnya juga tidak terjadi. Ini kontrapositif berantai.",
+   "Kebalikannya tidak berlaku: kalau awal rantai terjadi, akhirnya pasti terjadi. Tetapi kalau ujung tidak terjadi, awalnya pasti tidak."
+  ],
+  "opt": [
+   "Benar. Tim belum dibentuk, maka proyek belum dimulai, maka anggaran belum disetujui.",
+   "Jika anggaran disetujui, proyek pasti dimulai (Premis 1).",
+   "Jika proyek dimulai, tim pasti sudah dibentuk, tetapi tim belum ada.",
+   "Proyek yang dimulai menuntut tim terbentuk, tetapi tim belum ada.",
+   "Tidak ada yang menyatakan hal itu sebagai fakta. Soal hanya menyatakan tim belum dibentuk."
+  ],
+  "fast": [
+   "Tulis rantai dengan panah: anggaran, proyek, tim.",
+   "Coret ujung (tim belum ada).",
+   "Mundur satu per satu: semua mata rantai sebelumnya ikut tidak terjadi."
+  ],
+  "mn": "Ujung putus berarti semua yang sebelumnya putus.",
+  "trap": "Opsi yang memuat 'tetapi' sering mengandung satu mata rantai yang tidak mungkin."
+ },
+ {
+  "id": "tiu-017",
+  "sub": "TIU",
+  "topic": "Penalaran logis: ingkaran pernyataan",
+  "fam": "L",
+  "status": "draf",
+  "source": "orisinal; pola dari e-book Bank Soal TIU (ditulis ulang)",
+  "q": "Pernyataan: \"Jika hujan deras turun, maka upacara ditunda.\"\nIngkaran dari pernyataan tersebut adalah ....",
+  "o": [
+   "Jika hujan deras tidak turun, maka upacara tidak ditunda",
+   "Jika upacara tidak ditunda, maka hujan deras tidak turun",
+   "Hujan deras tidak turun dan upacara ditunda",
+   "Hujan deras turun dan upacara ditunda",
+   "Hujan deras turun dan upacara tidak ditunda"
+  ],
+  "k": "E",
+  "core": "Yang ditanya: bentuk yang tepat bernilai salah ketika pernyataan asli benar, dan sebaliknya.",
+  "kon": [
+   "Pernyataan 'jika p maka q' hanya salah pada satu keadaan: p terjadi, tetapi q tidak.",
+   "Karena itu ingkarannya adalah 'p dan bukan q'. Ingkaran implikasi bukan implikasi lagi.",
+   "Kontrapositif dan pernyataan asli setara. Invers dan konvers tidak setara."
+  ],
+  "opt": [
+   "Ini invers. Invers tidak sama dengan ingkaran.",
+   "Ini kontrapositif. Ia setara dengan pernyataan asli, bukan ingkarannya.",
+   "Salah menegasikan: kedua bagian diubah tidak sesuai aturan.",
+   "Ini justru kasus yang sesuai dengan pernyataan asli.",
+   "Benar. Ingkaran 'jika p maka q' adalah 'p dan bukan q'."
+  ],
+  "fast": [
+   "Tanya: kapan janji ini dilanggar? Ketika hujan deras turun tetapi upacara tidak ditunda.",
+   "Pilih opsi dengan bentuk 'p dan bukan q'.",
+   "Coret semua opsi berbentuk 'jika-maka'."
+  ],
+  "mn": "Janji dilanggar: p terjadi, q tidak.",
+  "trap": "Kontrapositif sangat menggoda karena bunyinya mirip ingkaran, padahal setara dengan pernyataan asli."
+ },
+ {
+  "id": "tiu-018",
+  "sub": "TIU",
+  "topic": "Penalaran logis: silogisme berantai",
+  "fam": "L",
+  "status": "draf",
+  "source": "orisinal; pola dari e-book Bank Soal TIU (ditulis ulang)",
+  "q": "Premis 1: Semua pegawai yang mengikuti diklat memiliki sertifikat.\nPremis 2: Semua pemegang sertifikat berhak mengikuti seleksi promosi.\nPremis 3: Tidak ada pegawai honorer yang berhak mengikuti seleksi promosi.\nKesimpulan yang pasti benar adalah ....",
+  "o": [
+   "Semua pegawai honorer mengikuti diklat",
+   "Sebagian pegawai honorer memiliki sertifikat",
+   "Tidak ada pegawai honorer yang mengikuti diklat",
+   "Tidak ada pegawai yang berhak mengikuti seleksi promosi yang mengikuti diklat",
+   "Semua pegawai yang tidak mengikuti diklat adalah honorer"
+  ],
+  "k": "C",
+  "core": "Yang ditanya: kesimpulan dari tiga premis yang saling menyambung.",
+  "kon": [
+   "Gabungkan dua premis pertama: peserta diklat, pemegang sertifikat, berhak promosi. Maka semua peserta diklat berhak promosi.",
+   "Premis 3 menyatakan honorer berada di luar kelompok yang berhak promosi.",
+   "Peserta diklat seluruhnya di dalam kelompok berhak promosi, honorer seluruhnya di luar. Jadi keduanya tidak beririsan."
+  ],
+  "opt": [
+   "Bertentangan: peserta diklat berhak promosi, honorer tidak.",
+   "Pemegang sertifikat berhak promosi, honorer tidak. Tidak ada irisan.",
+   "Benar. Peserta diklat berhak ikut promosi, sedangkan honorer tidak berhak, sehingga keduanya tidak beririsan.",
+   "Salah. Semua peserta diklat justru berhak ikut seleksi promosi.",
+   "Tidak ada dasarnya di premis. Pegawai bukan honorer pun bisa tidak ikut diklat."
+  ],
+  "fast": [
+   "Gambar tiga lingkaran bersarang: diklat di dalam sertifikat di dalam berhak promosi.",
+   "Letakkan honorer di luar lingkaran terbesar.",
+   "Honorer pasti di luar lingkaran diklat."
+  ],
+  "mn": "Lingkaran bersarang: honorer di luar yang terbesar, berarti di luar semua yang lebih kecil.",
+  "trap": "Opsi dengan kata 'semua' sering terlalu kuat dan tidak ditunjang premis."
+ },
+ {
+  "id": "tiu-019",
+  "sub": "TIU",
+  "topic": "Penalaran logis: 'hanya jika'",
+  "fam": "L",
+  "status": "draf",
+  "source": "orisinal; pola dari e-book Bank Soal TIU (ditulis ulang)",
+  "q": "Pernyataan: \"Seorang pegawai menerima tunjangan kinerja hanya jika kehadirannya minimal 90%.\"\nPernyataan yang setara dengan pernyataan tersebut adalah ....",
+  "o": [
+   "Jika kehadiran minimal 90%, maka pegawai pasti menerima tunjangan kinerja",
+   "Jika pegawai tidak menerima tunjangan kinerja, maka kehadirannya kurang dari 90%",
+   "Pegawai dengan kehadiran minimal 90% tidak menerima tunjangan kinerja",
+   "Jika kehadiran pegawai kurang dari 90%, maka ia tidak menerima tunjangan kinerja",
+   "Semua pegawai dengan kehadiran kurang dari 90% tetap menerima tunjangan kinerja"
+  ],
+  "k": "D",
+  "core": "Yang ditanya: bentuk lain yang artinya sama persis dengan kalimat 'hanya jika'.",
+  "kon": [
+   "'p hanya jika q' berarti 'jika p maka q'. Yang diperlukan (kehadiran 90%) berada di sebelah kanan panah.",
+   "Pernyataan setara dengan 'jika p maka q' adalah kontrapositifnya: 'jika bukan q maka bukan p'.",
+   "Syarat perlu (kehadiran) tidak sama dengan syarat cukup. Jangan membalik arahnya."
+  ],
+  "opt": [
+   "Kebalikan arah. Kehadiran 90% adalah syarat perlu, belum menjamin tunjangan.",
+   "Ini invers. Bisa saja kehadiran 95% tetapi tidak menerima tunjangan karena alasan lain.",
+   "Berlawanan arah dengan pernyataan asli.",
+   "Benar. 'Hanya jika' berarti tunjangan mensyaratkan kehadiran minimal 90%. Kurang dari itu, tunjangan tidak diterima.",
+   "Bertentangan dengan pernyataan asli."
+  ],
+  "fast": [
+   "Ubah dulu ke bentuk 'jika-maka': jika tunjangan, maka hadir minimal 90%.",
+   "Buat kontrapositifnya: jika hadir kurang dari 90%, maka tidak tunjangan.",
+   "Cari opsi yang sama dengan salah satu dari dua bentuk itu."
+  ],
+  "mn": "'Hanya jika': yang disyaratkan ada di ujung panah.",
+  "trap": "Kata 'hanya jika' sering dibaca sebagai 'jika'. Itu membalik arah syarat."
+ },
+ {
+  "id": "tiu-020",
+  "sub": "TIU",
+  "topic": "Deret angka: selisih berlipat",
+  "fam": "H",
+  "status": "draf",
+  "source": "orisinal; pola dari e-book Bank Soal TIU (ditulis ulang)",
+  "q": "5, 7, 11, 19, 35, 67, ....",
+  "o": [
+   "99",
+   "115",
+   "123",
+   "131",
+   "135"
+  ],
+  "k": "D",
+  "core": "Yang ditanya: suku berikutnya dari deret yang naiknya makin besar.",
+  "kon": [
+   "Naik tidak seragam, jadi hitung selisih antarsuku.",
+   "Selisihnya 2, 4, 8, 16, 32: setiap kali dikali 2.",
+   "Selisih berikutnya 64, jadi suku berikutnya 67 + 64 = 131."
+  ],
+  "opt": [
+   "Menambah 32, padahal selisih berikutnya 64.",
+   "Menambah 48. Bukan bagian dari pola selisih berlipat dua.",
+   "Menambah 56. Bukan bagian dari pola selisih berlipat dua.",
+   "Benar. Selisihnya 2, 4, 8, 16, 32, dan berikutnya 64, sehingga 67 + 64 = 131.",
+   "Menambah 68. Tidak sesuai pola."
+  ],
+  "fast": [
+   "Hitung selisih tiap pasangan suku.",
+   "Jika selisih berlipat, lanjutkan lipatannya.",
+   "Hafal pangkat dua: 2, 4, 8, 16, 32, 64, 128."
+  ],
+  "mn": "Selisih dikali dua tiap langkah.",
+  "trap": "Terpancing mencari pola penjumlahan dua suku sebelumnya. Cek selisih dulu."
+ },
+ {
+  "id": "tiu-021",
+  "sub": "TIU",
+  "topic": "Deret angka: dua operasi bergantian",
+  "fam": "H",
+  "status": "draf",
+  "source": "orisinal; pola dari e-book Bank Soal TIU (ditulis ulang)",
+  "q": "2, 6, 7, 21, 22, 66, ....",
+  "o": [
+   "63",
+   "67",
+   "69",
+   "132",
+   "198"
+  ],
+  "k": "B",
+  "core": "Yang ditanya: suku berikutnya dari deret yang operasinya berganti-ganti.",
+  "kon": [
+   "Naik, lalu naik sedikit, lalu naik besar: tanda dua operasi bergantian.",
+   "2 ke 6 adalah x3, 6 ke 7 adalah +1, 7 ke 21 adalah x3, 21 ke 22 adalah +1, 22 ke 66 adalah x3.",
+   "Langkah berikutnya +1, jadi 66 + 1 = 67."
+  ],
+  "opt": [
+   "Mengurangi 3. Tidak sesuai pola.",
+   "Benar. Polanya dikali 3 lalu ditambah 1 bergantian. 66 + 1 = 67.",
+   "Menambah 3. Tidak sesuai pola.",
+   "Mengalikan 2. Pola yang dipakai dikali 3, lalu +1.",
+   "Mengalikan 3 lagi, padahal setelah dikali 3 giliran +1."
+  ],
+  "fast": [
+   "Bandingkan dua langkah pertama: apakah operasinya berbeda?",
+   "Tuliskan operasi untuk setiap langkah.",
+   "Lanjutkan sesuai urutan, perhatikan giliran terakhir."
+  ],
+  "mn": "Kali, tambah, kali, tambah.",
+  "trap": "Setelah 66 yang besar, mudah terbawa mengalikan lagi. Periksa giliran operasi yang terakhir."
+ },
+ {
+  "id": "tiu-022",
+  "sub": "TIU",
+  "topic": "Deret angka: dua barisan selang-seling",
+  "fam": "H",
+  "status": "draf",
+  "source": "orisinal; pola dari e-book Bank Soal TIU (ditulis ulang)",
+  "q": "4, 3, 8, 6, 16, 12, 32, ....",
+  "o": [
+   "20",
+   "24",
+   "28",
+   "36",
+   "64"
+  ],
+  "k": "B",
+  "core": "Yang ditanya: suku ke-8, yang berada di barisan posisi genap.",
+  "kon": [
+   "Deret yang terasa 'naik-turun' biasanya gabungan dua barisan yang diselang-seling.",
+   "Posisi ganjil: 4, 8, 16, 32 (dikali 2). Posisi genap: 3, 6, 12, dan berikutnya 24 (dikali 2).",
+   "Suku yang diminta berada di posisi ke-8 (genap), jadi ikuti barisan genap."
+  ],
+  "opt": [
+   "Tidak sesuai pola barisan genap yang dikali 2.",
+   "Benar. Posisi genap: 3, 6, 12, lalu 24 (dikali 2).",
+   "Tidak sesuai pola barisan genap yang dikali 2.",
+   "Tidak sesuai pola barisan genap yang dikali 2.",
+   "Ini kelanjutan barisan posisi ganjil (4, 8, 16, 32, 64), padahal suku yang diminta posisi genap."
+  ],
+  "fast": [
+   "Pisahkan suku ganjil dan genap ke dua baris.",
+   "Cari pola tiap baris.",
+   "Pastikan posisi suku yang ditanya, lalu pakai barisan yang sesuai."
+  ],
+  "mn": "Naik-turun berarti dua barisan.",
+  "trap": "Angka 64 menggoda karena kelanjutan barisan ganjil. Cek posisi suku yang ditanya."
+ },
+ {
+  "id": "tiu-023",
+  "sub": "TIU",
+  "topic": "Deret angka: pembagi bertingkat",
+  "fam": "H",
+  "status": "draf",
+  "source": "orisinal; pola dari e-book Bank Soal TIU (ditulis ulang)",
+  "q": "720, 360, 120, 30, 6, ....",
+  "o": [
+   "0",
+   "1",
+   "2",
+   "3",
+   "12"
+  ],
+  "k": "B",
+  "core": "Yang ditanya: suku berikutnya dari deret yang turun makin pelan.",
+  "kon": [
+   "Turun dengan cepat lalu melambat: curigai pembagian dengan angka yang naik.",
+   "720 / 2 = 360, 360 / 3 = 120, 120 / 4 = 30, 30 / 5 = 6.",
+   "Pembagi berikutnya 6, jadi 6 / 6 = 1."
+  ],
+  "opt": [
+   "Pembagian tidak menghasilkan 0 dari bilangan positif.",
+   "Benar. Dibagi 2, 3, 4, 5, lalu 6. 6 dibagi 6 = 1.",
+   "6 dibagi 3. Pembagi yang dipakai pola adalah 6.",
+   "6 dibagi 2. Pembagi yang dipakai pola adalah 6.",
+   "Tidak sesuai pola pembagian yang menurun."
+  ],
+  "fast": [
+   "Hitung rasio antarsuku (suku sebelum dibagi suku sesudah): 2, 3, 4, 5.",
+   "Lanjutkan rasionya: 6.",
+   "Bagi suku terakhir dengan 6."
+  ],
+  "mn": "Pembagi naik 2, 3, 4, 5, 6.",
+  "trap": "Penurunan yang tampak tidak beraturan terlihat seperti selisih. Cek rasionya juga."
+ },
+ {
+  "id": "tiu-024",
+  "sub": "TIU",
+  "topic": "Matematika dasar: usia",
+  "fam": "H",
+  "status": "draf",
+  "source": "orisinal; pola dari e-book Bank Soal TIU (ditulis ulang)",
+  "q": "Usia seorang ayah saat ini 4 kali usia anaknya. Enam tahun yang lalu, usia ayah 7 kali usia anaknya. Usia ayah saat ini adalah ... tahun.",
+  "o": [
+   "40",
+   "44",
+   "48",
+   "52",
+   "56"
+  ],
+  "k": "C",
+  "core": "Yang ditanya: usia ayah sekarang, dari dua perbandingan usia pada waktu berbeda.",
+  "kon": [
+   "Misalkan usia anak sekarang x, usia ayah 4x.",
+   "Enam tahun lalu: 4x - 6 = 7(x - 6), sehingga 4x - 6 = 7x - 42 dan x = 12.",
+   "Usia ayah 4 x 12 = 48."
+  ],
+  "opt": [
+   "Anak 10, ayah 40. Enam tahun lalu: 34 dan 4, rasionya 8,5.",
+   "Anak 11, ayah 44. Enam tahun lalu: 38 dan 5, rasionya 7,6.",
+   "Benar. Anak 12 tahun, ayah 48. Enam tahun lalu: 42 dan 6, rasionya 7.",
+   "Anak 13, ayah 52. Enam tahun lalu: 46 dan 7, rasionya sekitar 6,6.",
+   "Anak 14, ayah 56. Enam tahun lalu: 50 dan 8, rasionya 6,25."
+  ],
+  "fast": [
+   "Pilih variabel pada anak: anak x, ayah 4x.",
+   "Kurangi 6 dari keduanya, lalu pasang persamaan.",
+   "Atau uji opsi: bagi dengan 4, kurangi 6 dari keduanya, cek rasio 7."
+  ],
+  "mn": "Dua waktu, dua persamaan, kurangi semua orang dengan tahun yang sama.",
+  "trap": "Lupa mengurangi 6 dari usia anak juga. Semua orang mundur dengan jumlah tahun yang sama."
+ },
+ {
+  "id": "tiu-025",
+  "sub": "TIU",
+  "topic": "Matematika dasar: campuran dan keuntungan",
+  "fam": "H",
+  "status": "draf",
+  "source": "orisinal; pola dari e-book Bank Soal TIU (ditulis ulang)",
+  "q": "Seorang pedagang mencampur 30 kg beras seharga Rp10.000 per kg dengan 20 kg beras seharga Rp15.000 per kg. Agar memperoleh keuntungan 20% dari total modal, harga jual campuran per kg adalah ....",
+  "o": [
+   "Rp12.000",
+   "Rp12.500",
+   "Rp14.000",
+   "Rp14.400",
+   "Rp15.000"
+  ],
+  "k": "D",
+  "core": "Yang ditanya: harga jual per kg untuk laba 20% dari modal campuran.",
+  "kon": [
+   "Hitung total modal: 30 x 10.000 + 20 x 15.000 = 600.000.",
+   "Modal per kg = 600.000 / 50 kg = 12.000. Ini rata-rata berbobot, bukan rata-rata biasa.",
+   "Harga jual = 12.000 x 1,2 = 14.400."
+  ],
+  "opt": [
+   "Ini modal per kg, belum ada keuntungan.",
+   "Rata-rata biasa (10.000 dan 15.000), tanpa bobot jumlah kg dan tanpa keuntungan.",
+   "Menambah Rp2.000 tetap. Padahal 20% dari Rp12.000 adalah Rp2.400.",
+   "Benar. Modal Rp600.000 untuk 50 kg, yaitu Rp12.000 per kg. Ditambah 20% menjadi Rp14.400.",
+   "Rata-rata biasa Rp12.500 lalu ditambah 20%. Tidak memakai bobot kilogram."
+  ],
+  "fast": [
+   "Hitung modal total dari kg dikali harga.",
+   "Bagi dengan total kg untuk dapat modal per kg.",
+   "Kalikan 1,2 untuk laba 20%."
+  ],
+  "mn": "Rata-rata campuran: total harga dibagi total kg.",
+  "trap": "Rata-rata biasa dua harga (12.500) mengabaikan bahwa beras murah lebih banyak jumlahnya."
+ },
+ {
+  "id": "tiu-026",
+  "sub": "TIU",
+  "topic": "Matematika dasar: KPK",
+  "fam": "H",
+  "status": "draf",
+  "source": "orisinal; pola dari e-book Bank Soal TIU (ditulis ulang)",
+  "q": "Tiga lampu isyarat menyala berulang: lampu A tiap 12 detik, lampu B tiap 18 detik, dan lampu C tiap 30 detik. Ketiganya menyala bersamaan pada pukul 19.00.00. Ketiganya akan menyala bersamaan lagi untuk pertama kali pada pukul ....",
+  "o": [
+   "19.01.00",
+   "19.01.30",
+   "19.03.00",
+   "19.06.00",
+   "19.09.00"
+  ],
+  "k": "C",
+  "core": "Yang ditanya: waktu pertama ketiga lampu menyala bersamaan lagi.",
+  "kon": [
+   "Kejadian berulang yang bertemu kembali dihitung dengan KPK.",
+   "12 = 2 x 2 x 3, 18 = 2 x 3 x 3, 30 = 2 x 3 x 5. KPK memakai faktor tertinggi: 2 x 2 x 3 x 3 x 5 = 180.",
+   "180 detik = 3 menit, jadi 19.00.00 + 3 menit = 19.03.00."
+  ],
+  "opt": [
+   "60 detik hanya kelipatan 12 dan 30. Bukan kelipatan 18.",
+   "90 detik hanya kelipatan 18 dan 30. Bukan kelipatan 12.",
+   "Benar. KPK dari 12, 18, 30 adalah 180 detik, yaitu 3 menit.",
+   "360 detik memang kelipatan ketiganya, tetapi bukan yang pertama.",
+   "540 detik memang kelipatan ketiganya, tetapi bukan yang pertama."
+  ],
+  "fast": [
+   "Faktorkan ketiga bilangan.",
+   "Ambil tiap faktor dengan pangkat tertinggi, lalu kalikan.",
+   "Ubah detik ke menit sebelum menjumlah ke jam."
+  ],
+  "mn": "Bertemu lagi? KPK. Terbagi rata? FPB.",
+  "trap": "Pengecoh adalah KPK dua dari tiga bilangan (60 dan 90 detik). Pastikan opsi kelipatan ketiganya."
+ },
+ {
+  "id": "tiu-027",
+  "sub": "TIU",
+  "topic": "Matematika dasar: himpunan",
+  "fam": "H",
+  "status": "draf",
+  "source": "orisinal; pola dari e-book Bank Soal TIU (ditulis ulang)",
+  "q": "Dari 60 pegawai di sebuah unit, 35 orang menguasai Excel dan 28 orang menguasai Python. Sebanyak 12 orang menguasai keduanya. Banyak pegawai yang tidak menguasai keduanya adalah ....",
+  "o": [
+   "9",
+   "12",
+   "21",
+   "25",
+   "32"
+  ],
+  "k": "A",
+  "core": "Yang ditanya: pegawai yang berada di luar kedua kelompok.",
+  "kon": [
+   "Rumus gabungan dua himpunan: n(A atau B) = n(A) + n(B) - n(A dan B). Irisan dikurangi karena terhitung dua kali.",
+   "35 + 28 - 12 = 51 orang menguasai paling sedikit satu.",
+   "Yang tidak menguasai keduanya = total - gabungan = 60 - 51 = 9."
+  ],
+  "opt": [
+   "Benar. Yang menguasai minimal salah satu: 35 + 28 - 12 = 51. Sisanya 60 - 51 = 9.",
+   "Itu jumlah yang menguasai keduanya, bukan yang tidak menguasai keduanya.",
+   "Hanya menghitung yang menguasai satu bidang saja (23 + 16 = 39), lupa 12 orang yang menguasai keduanya.",
+   "Itu 60 - 35, yaitu yang tidak menguasai Excel saja.",
+   "Itu 60 - 28, yaitu yang tidak menguasai Python saja."
+  ],
+  "fast": [
+   "Gambar dua lingkaran beririsan.",
+   "Isi irisan dulu (12), lalu bagian sisa tiap lingkaran (23 dan 16).",
+   "Jumlahkan ketiga bagian (51), lalu kurangkan dari 60."
+  ],
+  "mn": "Irisan dihitung sekali, bukan dua kali.",
+  "trap": "Menjumlah 35 + 28 menghasilkan 63 yang lebih besar dari total pegawai. Itu tanda irisan harus dikurangi."
  }
 ]
