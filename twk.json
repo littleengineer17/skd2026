@@ -1,0 +1,307 @@
+[
+ {
+  "id": "twk-001",
+  "sub": "TWK",
+  "topic": "Pilar negara: UUD 1945",
+  "diag": 1,
+  "fam": "F",
+  "status": "draf",
+  "source": "orisinal",
+  "q": "Sebuah Peraturan Pemerintah digugat karena dianggap bertentangan dengan undang-undang. Pada saat yang sama, sebuah undang-undang digugat karena dianggap bertentangan dengan UUD 1945. Lembaga yang berwenang menguji masing-masing perkara tersebut adalah ....",
+  "o": [
+   "PP diuji oleh Mahkamah Konstitusi; UU diuji oleh Mahkamah Agung",
+   "Keduanya diuji oleh Mahkamah Konstitusi",
+   "PP diuji oleh Mahkamah Agung; UU diuji oleh Mahkamah Konstitusi",
+   "Keduanya diuji oleh Mahkamah Agung",
+   "PP diuji oleh DPR; UU diuji oleh Mahkamah Konstitusi"
+  ],
+  "k": "C",
+  "core": "Yang ditanya: lembaga mana yang menguji dua peraturan yang tingkatnya berbeda.",
+  "kon": [
+   "Hierarki peraturan: UUD 1945 di puncak, lalu undang-undang, lalu Peraturan Pemerintah dan peraturan di bawahnya.",
+   "Pengujian selalu mempertemukan dua tingkat: peraturan yang digugat diuji terhadap peraturan di atasnya.",
+   "PP diuji terhadap UU oleh Mahkamah Agung (Pasal 24A ayat 1). UU diuji terhadap UUD oleh Mahkamah Konstitusi (Pasal 24C ayat 1)."
+  ],
+  "opt": [
+   "Terbalik. MK tidak menguji PP, dan MA tidak menguji UU terhadap UUD.",
+   "MK hanya berwenang menguji UU terhadap UUD, jadi tidak bisa menguji PP.",
+   "Benar. PP (di bawah UU) diuji MA, UU terhadap UUD diuji MK.",
+   "MA tidak berwenang menguji UU terhadap UUD.",
+   "DPR membentuk undang-undang. DPR bukan lembaga yudisial yang menguji PP."
+  ],
+  "fast": [
+   "Gambar tangga peraturan: UUD, UU, PP.",
+   "Lihat peraturan yang digugat dan 'terhadap apa' ia diuji.",
+   "Terhadap UUD berarti MK. Terhadap UU (peraturan di bawahnya) berarti MA."
+  ],
+  "mn": "MK = UU diadu dengan UUD. MA = peraturan di bawah UU diadu dengan UU.",
+  "trap": "Pengecoh membalik pasangan lembaga atau memasukkan DPR. Periksa pasangannya, bukan hanya nama lembaganya."
+ },
+ {
+  "id": "twk-002",
+  "sub": "TWK",
+  "topic": "Pilar negara: Pancasila",
+  "diag": 2,
+  "fam": "R",
+  "status": "draf",
+  "source": "orisinal",
+  "q": "Kepala desa memutuskan sendiri lokasi pembangunan balai warga tanpa musyawarah. Hasilnya ternyata menguntungkan seluruh warga dan keputusan itu dinilai adil. Meski begitu, cara pengambilan keputusannya paling bertentangan dengan pengamalan sila ke ....",
+  "o": [
+   "4",
+   "2",
+   "3",
+   "5",
+   "1"
+  ],
+  "k": "A",
+  "core": "Yang ditanya: CARA mengambil keputusan, bukan hasilnya.",
+  "kon": [
+   "Sila ke-4 menekankan proses: musyawarah, hikmat kebijaksanaan, dan perwakilan.",
+   "Keputusan sepihak tanpa musyawarah melanggar prosesnya, sebaik apa pun hasilnya.",
+   "Sila ke-5 (keadilan sosial) bicara tentang hasil yang merata. Itu bukan yang ditanyakan di sini."
+  ],
+  "opt": [
+   "Benar. Sila 4: kerakyatan yang dipimpin hikmat kebijaksanaan dalam permusyawaratan atau perwakilan.",
+   "Sila 2 soal kemanusiaan dan perlakuan beradab. Kasus ini tidak menyangkut martabat manusia.",
+   "Sila 3 soal persatuan. Keputusan sepihak tidak otomatis memecah persatuan.",
+   "Sila 5 soal keadilan hasil. Ini jebakan karena soal sengaja menyebut hasil yang menguntungkan semua.",
+   "Sila 1 soal ketuhanan dan toleransi beragama. Tidak ada unsur itu di kasus ini."
+  ],
+  "fast": [
+   "Garis bawahi 'tanpa musyawarah' dan 'cara pengambilan keputusannya'.",
+   "Kata kunci musyawarah atau perwakilan langsung mengarah ke sila 4.",
+   "Abaikan informasi pemanis seperti 'hasilnya menguntungkan'."
+  ],
+  "mn": "Sila 4 = bangku melingkar: semua boleh bersuara sebelum diputuskan.",
+  "trap": "Soal sengaja menaruh hasil yang bagus untuk memancing kamu memilih sila 5."
+ },
+ {
+  "id": "twk-003",
+  "sub": "TWK",
+  "topic": "Integritas",
+  "diag": 3,
+  "fam": "I",
+  "status": "draf",
+  "source": "orisinal",
+  "q": "Seorang ASN pengelola pengadaan menerima kiriman parsel bernilai tinggi dari rekanan menjelang hari raya, setelah kontrak selesai. Rekanan mengatakan itu hanya tanda terima kasih. Tindakan yang paling tepat sesuai ketentuan gratifikasi adalah ....",
+  "o": [
+   "Menerima karena kontrak sudah selesai dan tidak ada permintaan apa pun",
+   "Membagikan parsel kepada rekan sekantor agar tidak dianggap memperkaya diri",
+   "Mengembalikan parsel secara diam-diam tanpa melapor kepada siapa pun",
+   "Melaporkan penerimaan kepada KPK, langsung atau melalui unit pengendali gratifikasi instansi, paling lambat 30 hari kerja sejak diterima",
+   "Menyimpan parsel sambil menunggu atasan menentukan sikap"
+  ],
+  "k": "D",
+  "core": "Yang ditanya: langkah paling tepat atas pemberian yang berkaitan dengan jabatan.",
+  "kon": [
+   "Gratifikasi adalah pemberian dalam arti luas kepada pegawai negeri atau penyelenggara negara. Yang berhubungan dengan jabatan wajib dilaporkan.",
+   "Aturannya: lapor ke KPK paling lambat 30 hari kerja sejak diterima, langsung atau lewat unit pengendali gratifikasi instansi.",
+   "Nilai integritas yang diuji: jujur dan transparan. Alasan 'kontrak sudah selesai' atau 'hanya terima kasih' tidak menghapus kewajiban lapor."
+  ],
+  "opt": [
+   "Menerima tanpa lapor menyalahi kewajiban. Kontrak yang sudah selesai tidak mengubah aturan.",
+   "Membagikan ke rekan tetap berarti menerima tanpa melapor, dan menyeret orang lain.",
+   "Niatnya baik, tetapi dilakukan diam-diam: tidak transparan dan tidak ada jejak resmi.",
+   "Benar. Jalur resmi dan ada batas waktu yang jelas.",
+   "Menunda tanpa jalur resmi. Batas 30 hari kerja tetap berjalan selama kamu menunggu."
+  ],
+  "fast": [
+   "Soal integritas: cari opsi yang transparan dan lewat jalur resmi.",
+   "Coret opsi bertanda 'diam-diam', 'menunggu', atau 'membagikan'.",
+   "Hafal angkanya: 30 hari kerja."
+  ],
+  "mn": "Terima? Lapor! Tiga puluh hari kerja, jangan sampai lewat.",
+  "trap": "Alasan manis di soal ('kontrak sudah selesai', 'tanda terima kasih') dibuat untuk membenarkan penerimaan."
+ },
+ {
+  "id": "twk-004",
+  "sub": "TWK",
+  "topic": "Nasionalisme: sejarah",
+  "diag": 4,
+  "fam": "F",
+  "status": "draf",
+  "source": "orisinal",
+  "q": "Urutkan peristiwa berikut secara kronologis.\n(1) Dekrit Presiden kembali ke UUD 1945\n(2) Kongres Pemuda II dan Sumpah Pemuda\n(3) Berdirinya Budi Utomo\n(4) Penetapan UUD 1945 oleh PPKI",
+  "o": [
+   "2 - 3 - 4 - 1",
+   "3 - 2 - 4 - 1",
+   "3 - 2 - 1 - 4",
+   "3 - 4 - 2 - 1",
+   "2 - 3 - 1 - 4"
+  ],
+  "k": "B",
+  "core": "Yang ditanya: urutan waktu empat peristiwa. Soal tidak memberi tahun, jadi kamu harus mengingatnya.",
+  "kon": [
+   "Budi Utomo (1908): awal pergerakan nasional modern.",
+   "Sumpah Pemuda (1928): ikrar persatuan para pemuda dari berbagai daerah.",
+   "PPKI menetapkan UUD 1945 pada 18 Agustus 1945, sehari setelah proklamasi.",
+   "Dekrit Presiden 5 Juli 1959: kembali ke UUD 1945."
+  ],
+  "opt": [
+   "Sumpah Pemuda (1928) tidak mungkin mendahului Budi Utomo (1908).",
+   "Benar: 1908, 1928, 1945, 1959.",
+   "Dekrit 1959 tidak mungkin sebelum penetapan UUD 1945 (1945).",
+   "Penetapan UUD (1945) tidak mungkin mendahului Sumpah Pemuda (1928).",
+   "Dua kesalahan sekaligus: Budi Utomo setelah Sumpah Pemuda dan Dekrit sebelum UUD."
+  ],
+  "fast": [
+   "Ubah tiap peristiwa jadi tahun: 1959, 1928, 1908, 1945.",
+   "Urutkan angkanya: 1908, 1928, 1945, 1959.",
+   "Cocokkan urutan itu dengan nomor peristiwa di opsi."
+  ],
+  "mn": "Empat tonggak: 08, 28, 45, 59. Selisihnya 20, 17, 14: makin merapat menuju merdeka.",
+  "trap": "Opsi disusun dari angka yang mirip. Jangan menebak dari kesan; ubah ke tahun dulu."
+ },
+ {
+  "id": "twk-005",
+  "sub": "TWK",
+  "topic": "Bela negara",
+  "diag": 5,
+  "fam": "F",
+  "status": "draf",
+  "source": "orisinal",
+  "q": "Frasa 'upaya pembelaan negara' sebagai hak dan kewajiban setiap warga negara terdapat dalam ....",
+  "o": [
+   "Pasal 30 ayat (1) UUD 1945",
+   "Pasal 28J ayat (1) UUD 1945",
+   "Pasal 31 ayat (1) UUD 1945",
+   "Pasal 33 ayat (1) UUD 1945",
+   "Pasal 27 ayat (3) UUD 1945"
+  ],
+  "k": "E",
+  "core": "Yang ditanya: pasal yang memuat frasa persis 'upaya pembelaan negara'.",
+  "kon": [
+   "Pasal 27 ayat (3): setiap warga negara berhak dan wajib ikut serta dalam upaya pembelaan negara.",
+   "Pasal 30 ayat (1): berhak dan wajib ikut serta dalam usaha pertahanan dan keamanan negara. Mirip, tetapi frasanya berbeda.",
+   "Pasal 28J (menghormati hak asasi orang lain), 31 (pendidikan), dan 33 (perekonomian) tidak membahas bela negara."
+  ],
+  "opt": [
+   "Pasal 30 ayat (1) memakai frasa 'usaha pertahanan dan keamanan negara'. Ini pengecoh terdekat.",
+   "Pasal 28J ayat (1): kewajiban menghormati hak asasi manusia orang lain.",
+   "Pasal 31 ayat (1): hak setiap warga atas pendidikan.",
+   "Pasal 33 ayat (1): perekonomian disusun sebagai usaha bersama.",
+   "Benar. Pasal 27 ayat (3) memuat 'upaya pembelaan negara'."
+  ],
+  "fast": [
+   "Cocokkan frasa persis di soal dengan isi pasal.",
+   "Pembelaan negara = Pasal 27 ayat (3). Pertahanan dan keamanan = Pasal 30.",
+   "Jika ragu antara 27 dan 30, lihat kata kerjanya: 'upaya pembelaan' atau 'usaha pertahanan'."
+  ],
+  "mn": "27 = bela negara. 30 = hankam. Satu per satu, jangan tertukar.",
+  "trap": "Pasal 30 ayat (1) hampir sama tetapi bukan jawabannya. Perhatikan frasa, bukan hanya temanya."
+ },
+ {
+  "id": "twk-006",
+  "sub": "TWK",
+  "topic": "Bahasa Indonesia: kalimat efektif",
+  "diag": 6,
+  "fam": "B",
+  "status": "draf",
+  "source": "orisinal",
+  "q": "Kalimat yang tidak efektif karena memakai penanda jamak secara berlebihan adalah ....",
+  "o": [
+   "Seluruh peserta diwajibkan membawa kartu ujian masing-masing.",
+   "Banyak para peserta belum mengumpulkan berkas pendaftaran.",
+   "Panitia mengumumkan hasil seleksi administrasi kemarin.",
+   "Pegawai itu dipromosikan karena kinerjanya yang konsisten.",
+   "Kami akan segera menindaklanjuti laporan tersebut."
+  ],
+  "k": "B",
+  "core": "Yang ditanya: kalimat yang boros karena penanda jamaknya ganda.",
+  "kon": [
+   "Kalimat efektif itu hemat kata, jelas, dan tidak berulang makna.",
+   "'Banyak' sudah menyatakan jumlah lebih dari satu. 'Para' juga penanda jamak. Dipakai bersama, keduanya mubazir.",
+   "Perbaikan: 'Banyak peserta belum mengumpulkan berkas' atau 'Para peserta belum mengumpulkan berkas'."
+  ],
+  "opt": [
+   "Efektif. 'Masing-masing' menjelaskan tiap peserta membawa kartunya sendiri.",
+   "Benar. 'Banyak' dan 'para' sama-sama jamak, jadi berlebihan.",
+   "Efektif. Susunannya jelas dan tidak ada kata berlebih.",
+   "Efektif. 'Yang' menyambung keterangan kinerja dengan wajar.",
+   "Efektif. Subjek, predikat, dan objeknya lengkap."
+  ],
+  "fast": [
+   "Cari penanda jamak: banyak, para, beberapa, seluruh, kata ulang.",
+   "Dua penanda jamak dalam satu frasa berarti curiga.",
+   "Cek juga pleonasme lain: naik ke atas, mundur ke belakang."
+  ],
+  "mn": "Satu penanda jamak cukup. Dua penanda berarti boros.",
+  "trap": "Opsi lain terdengar formal sehingga terasa benar. Fokus pada kata yang ganda, bukan pada nada kalimat."
+ },
+ {
+  "id": "twk-007",
+  "sub": "TWK",
+  "topic": "Pilar negara: Bhinneka Tunggal Ika",
+  "diag": 7,
+  "fam": "F",
+  "status": "draf",
+  "source": "orisinal",
+  "q": "Pernyataan yang benar tentang semboyan Bhinneka Tunggal Ika adalah ....",
+  "o": [
+   "Dikutip dari Kakawin Sutasoma karya Mpu Tantular dan tercantum dalam Pasal 36A UUD 1945",
+   "Dikutip dari Negarakertagama karya Mpu Prapanca dan tercantum dalam Pasal 36A UUD 1945",
+   "Dikutip dari Kakawin Sutasoma karya Mpu Tantular dan tercantum dalam Pasal 36B UUD 1945",
+   "Dikutip dari Pararaton dan tercantum dalam Pasal 35 UUD 1945",
+   "Dikutip dari Kakawin Sutasoma karya Mpu Prapanca dan tercantum dalam Pasal 36A UUD 1945"
+  ],
+  "k": "A",
+  "core": "Yang ditanya: pernyataan yang benar pada TIGA detail sekaligus: kitab, penulis, dan pasal.",
+  "kon": [
+   "Semboyan berasal dari Kakawin Sutasoma karya Mpu Tantular (zaman Majapahit).",
+   "Dasar konstitusi: Pasal 36A UUD 1945, yaitu Lambang Negara Garuda Pancasila dengan semboyan Bhinneka Tunggal Ika.",
+   "Negarakertagama ditulis Mpu Prapanca. Pasal 36B mengatur Lagu Kebangsaan. Pasal 35 mengatur Bendera Negara."
+  ],
+  "opt": [
+   "Benar. Sutasoma, Mpu Tantular, dan Pasal 36A cocok semuanya.",
+   "Pasangan kitab dan penulis salah: Negarakertagama adalah karya Mpu Prapanca, bukan sumber semboyan.",
+   "Pasal 36B mengatur lagu kebangsaan Indonesia Raya, bukan lambang negara.",
+   "Pararaton bukan sumber semboyan, dan Pasal 35 mengatur bendera.",
+   "Sutasoma ditulis Mpu Tantular, bukan Mpu Prapanca."
+  ],
+  "fast": [
+   "Tiap opsi salah di tepat satu atau dua detail. Periksa kitab, penulis, pasal satu per satu.",
+   "Sutasoma berpasangan dengan Tantular. Negarakertagama berpasangan dengan Prapanca.",
+   "Urutan pasal: 35 Bendera, 36 Bahasa, 36A Lambang, 36B Lagu."
+  ],
+  "mn": "Tantular-Sutasoma (T-S), Prapanca-Negarakertagama (P-N). Pasal 35 sampai 36B: Bendera, Bahasa, Lambang, Lagu.",
+  "trap": "Setiap pengecoh benar sebagian. Satu detail yang salah sudah cukup untuk menggugurkan opsi."
+ },
+ {
+  "id": "twk-008",
+  "sub": "TWK",
+  "topic": "NKRI: otonomi daerah",
+  "diag": 8,
+  "fam": "F",
+  "status": "draf",
+  "source": "orisinal",
+  "q": "Sebuah pemerintah provinsi berencana mencetak mata uang daerah sebagai alat pembayaran sah di wilayahnya. Rencana tersebut melanggar urusan pemerintahan absolut di bidang ....",
+  "o": [
+   "Pertahanan",
+   "Yustisi",
+   "Moneter dan fiskal nasional",
+   "Agama",
+   "Politik luar negeri"
+  ],
+  "k": "C",
+  "core": "Yang ditanya: bidang urusan absolut yang dilanggar oleh pencetakan mata uang daerah.",
+  "kon": [
+   "Urusan pemerintahan absolut sepenuhnya menjadi wewenang pemerintah pusat dan tidak diserahkan ke daerah (UU 23/2014).",
+   "Enam urusan absolut: politik luar negeri, pertahanan, keamanan, yustisi, moneter dan fiskal nasional, serta agama.",
+   "Mata uang dan kebijakan moneter termasuk bidang moneter dan fiskal nasional."
+  ],
+  "opt": [
+   "Pertahanan mengatur angkatan bersenjata dan pertahanan negara, bukan mata uang.",
+   "Yustisi mengatur peradilan dan penegakan hukum.",
+   "Benar. Mata uang adalah urusan moneter dan fiskal nasional.",
+   "Agama adalah urusan keagamaan yang dikelola pusat, tidak terkait uang.",
+   "Politik luar negeri mengatur hubungan dengan negara lain."
+  ],
+  "fast": [
+   "Kata kunci: 'mata uang' langsung ke moneter.",
+   "Hafalkan enam urusan absolut dengan jari: luar negeri, pertahanan, keamanan, yustisi, moneter-fiskal, agama.",
+   "Urusan di luar enam itu disebut urusan konkuren (dibagi pusat dan daerah)."
+  ],
+  "mn": "Enam jari urusan absolut: Luar negeri, Pertahanan, Keamanan, Yustisi, Moneter-fiskal, Agama.",
+  "trap": "Semua opsi memang urusan absolut. Hanya satu yang cocok dengan kasusnya. Cocokkan kasus ke bidang, bukan sekadar mengenali daftar."
+ }
+]

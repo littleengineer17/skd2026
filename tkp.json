@@ -1,0 +1,354 @@
+[
+ {
+  "id": "tkp-001",
+  "sub": "TKP",
+  "topic": "Pelayanan publik",
+  "diag": 18,
+  "fam": "K",
+  "status": "draf",
+  "source": "orisinal",
+  "q": "Anda petugas loket layanan. Antrean panjang. Seorang warga marah karena berkasnya kurang surat pengantar RT dan menuntut tetap dilayani. Sikap Anda ....",
+  "o": [
+   "Menyarankan warga bertanya kepada petugas informasi",
+   "Menjelaskan dengan sopan kekurangan berkas, memberi daftar persyaratan tertulis, dan menunjukkan cara tercepat melengkapinya",
+   "Mengabaikan protes warga dan memanggil nomor antrean berikutnya",
+   "Menerima berkas yang kurang agar tidak terjadi keributan dan berharap dilengkapi kemudian",
+   "Menjelaskan dengan sopan bahwa berkas kurang karena belum ada surat pengantar RT, lalu meminta warga kembali setelah melengkapinya agar layanan dapat diproses sesuai aturan"
+  ],
+  "s": [
+   3,
+   5,
+   1,
+   2,
+   4
+  ],
+  "core": "Nilai yang diuji: pelayanan publik, yaitu ramah, sesuai aturan, dan memberi solusi.",
+  "kon": [
+   "Warga yang marah butuh kejelasan dan jalan keluar, bukan penolakan mentah.",
+   "Persyaratan tidak boleh dilonggarkan demi menghindari keributan.",
+   "Skor 5 menggabungkan tiga hal: sopan, jelas, dan solusi tercepat."
+  ],
+  "opt": [
+   "Mengarahkan memang benar, tetapi melempar warga ke petugas lain tanpa penjelasan.",
+   "Sopan, jelas, tertulis, dan mempercepat warga melengkapi berkas. Lengkap.",
+   "Mengabaikan warga melanggar prinsip pelayanan publik.",
+   "Melanggar prosedur dan berisiko menimbulkan masalah di kemudian hari.",
+   "Benar dan sopan, tetapi tidak membantu warga menemukan cara tercepat melengkapi berkas."
+  ],
+  "fast": [
+   "Bayangkan petugas ideal: ramah, tegas pada aturan, dan solutif.",
+   "Coret dulu opsi yang mengabaikan atau melanggar aturan.",
+   "Dari opsi yang tersisa, pilih yang paling lengkap membantu warga."
+  ],
+  "mn": "Sopan + aturan + solusi = skor 5.",
+  "trap": "Opsi D tampak 'baik hati' tetapi melanggar aturan. Kebaikan yang melanggar prosedur bukan skor tertinggi."
+ },
+ {
+  "id": "tkp-002",
+  "sub": "TKP",
+  "topic": "Jejaring kerja",
+  "diag": 19,
+  "fam": "K",
+  "status": "draf",
+  "source": "orisinal",
+  "q": "Anda harus menyerahkan laporan besok pagi, tetapi rekan dari unit lain belum memberi data yang Anda perlukan dan tidak merespons pesan. Sikap Anda ....",
+  "o": [
+   "Menunda laporan sampai data diberikan tanpa memberi tahu siapa pun",
+   "Menyusun laporan dengan data seadanya tanpa menyebut keterbatasannya",
+   "Menghubungi rekan kembali lewat telepon dan menegaskan tenggat laporan",
+   "Melaporkan ketidakresponsifan rekan itu kepada atasan tanpa menghubungi rekan lebih dulu",
+   "Menghubungi rekan secara santun untuk memahami kendalanya, menawarkan format permintaan data yang lebih ringkas, dan memberi tahu atasan bila tetap terhambat"
+  ],
+  "s": [
+   1,
+   2,
+   4,
+   3,
+   5
+  ],
+  "core": "Nilai yang diuji: jejaring kerja, yaitu komunikasi lintas unit.",
+  "kon": [
+   "Hambatan antarunit diselesaikan dulu lewat komunikasi langsung yang santun.",
+   "Eskalasi ke atasan dilakukan setelah upaya sendiri, supaya hubungan kerja tidak rusak.",
+   "Tenggat dijaga secara transparan, bukan disembunyikan."
+  ],
+  "opt": [
+   "Diam dan menunda tanpa kabar membahayakan tenggat.",
+   "Laporan jadi tidak akurat dan keterbatasannya disembunyikan.",
+   "Sudah aktif menghubungi, tetapi masih satu arah: menegaskan tenggat tanpa memahami kendala rekan.",
+   "Melapor ke atasan sebelum mencoba berkomunikasi berisiko merusak hubungan.",
+   "Memahami kendala, mempermudah rekan, dan menyiapkan eskalasi bila perlu."
+  ],
+  "fast": [
+   "Urutan ideal: komunikasi langsung, permudah rekan, lalu eskalasi bila perlu.",
+   "Hindari opsi yang menyembunyikan masalah.",
+   "Cek apakah opsi menjaga hubungan sekaligus target."
+  ],
+  "mn": "Hubungi dulu, bantu dulu, baru naik ke atasan.",
+  "trap": "Opsi C terlihat proaktif, tetapi hanya menekan. Skor 5 juga membantu rekan menyelesaikan masalahnya."
+ },
+ {
+  "id": "tkp-003",
+  "sub": "TKP",
+  "topic": "Sosial budaya",
+  "diag": 20,
+  "fam": "K",
+  "status": "draf",
+  "source": "orisinal",
+  "q": "Anda baru dipindahtugaskan ke daerah dengan adat berbeda. Warga menggelar upacara adat pada hari kerja dan seluruh pegawai setempat diundang. Sikap Anda ....",
+  "o": [
+   "Hadir sebentar untuk menghormati undangan, lalu kembali bekerja agar pelayanan kepada masyarakat tidak terganggu dan tugas hari itu tetap selesai",
+   "Mengkritik acara itu sebagai pemborosan di hadapan rekan",
+   "Tidak hadir karena belum memahami adat setempat dan memilih bekerja",
+   "Berkoordinasi dengan atasan agar pelayanan tetap berjalan, lalu ikut berpartisipasi dan belajar makna adat tersebut",
+   "Menanyakan alasan acara dan berpartisipasi hanya jika diwajibkan"
+  ],
+  "s": [
+   4,
+   1,
+   2,
+   5,
+   3
+  ],
+  "core": "Nilai yang diuji: sosial budaya, yaitu menghormati keberagaman tanpa mengabaikan tugas.",
+  "kon": [
+   "ASN menghormati adat dan budaya setempat.",
+   "Tugas pelayanan tetap harus berjalan, sehingga perlu koordinasi dengan atasan.",
+   "Belajar memahami makna adat menunjukkan sikap terbuka."
+  ],
+  "opt": [
+   "Menghormati dan menjaga tugas, tetapi kurang berinteraksi untuk mempelajari adat.",
+   "Mengkritik budaya di depan rekan merusak hubungan sosial.",
+   "Menghindar karena belum paham menutup kesempatan belajar.",
+   "Menyeimbangkan budaya dan tugas lewat koordinasi, partisipasi, dan belajar.",
+   "Berpartisipasi minimal hanya jika diwajibkan. Sikapnya pasif."
+  ],
+  "fast": [
+   "Cari opsi yang menghormati budaya DAN menjaga tugas.",
+   "Coret yang mengkritik atau menghindar.",
+   "Pilih yang melibatkan koordinasi dan sikap belajar."
+  ],
+  "mn": "Hormati adatnya, jaga tugasnya, belajar maknanya.",
+  "trap": "Panjang opsi tidak menentukan skor. Opsi A juga panjang, tetapi kurang mendalam dalam berinteraksi."
+ },
+ {
+  "id": "tkp-004",
+  "sub": "TKP",
+  "topic": "Teknologi informasi dan komunikasi",
+  "diag": 21,
+  "fam": "K",
+  "status": "draf",
+  "source": "orisinal",
+  "q": "Anda menerima email yang mengatasnamakan instansi seleksi ASN dan meminta login ulang akun Anda lewat tautan agar tidak dibekukan. Sikap Anda ....",
+  "o": [
+   "Mengklik tautan untuk melihat tampilannya tanpa memasukkan data",
+   "Segera login agar akun tidak dibekukan",
+   "Tidak mengklik tautan, memverifikasi lewat kanal resmi, melaporkan email ke admin TI, dan mengingatkan rekan",
+   "Menghapus email tanpa tindakan lain",
+   "Bertanya kepada rekan apakah mereka menerima email serupa sebelum memutuskan"
+  ],
+  "s": [
+   2,
+   1,
+   5,
+   4,
+   3
+  ],
+  "core": "Nilai yang diuji: teknologi informasi, yaitu kewaspadaan terhadap phishing.",
+  "kon": [
+   "Instansi resmi tidak meminta login ulang lewat tautan di email, apalagi dengan ancaman pembekuan.",
+   "Jangan klik tautan mencurigakan, meski berniat tidak mengisi data.",
+   "Verifikasi lewat kanal resmi dan laporkan agar rekan lain ikut terlindungi."
+  ],
+  "opt": [
+   "Mengklik saja sudah berisiko (pelacakan, malware).",
+   "Menyerahkan kredensial kepada penipu.",
+   "Aman, terverifikasi, melapor, dan melindungi rekan.",
+   "Aman, tetapi tidak melapor dan tidak melindungi pihak lain.",
+   "Bertanya ke rekan bukan verifikasi resmi dan keputusan jadi bergantung pada tebakan."
+  ],
+  "fast": [
+   "Curigai tanda-tanda: mendesak, mengancam, ada tautan.",
+   "Jangan klik. Verifikasi lewat kanal resmi.",
+   "Laporkan ke admin TI dan ingatkan rekan."
+  ],
+  "mn": "Desak + ancam + tautan = curiga. Jangan klik.",
+  "trap": "Rasa penasaran. Opsi A terasa aman karena 'tidak mengisi data', padahal klik saja sudah berisiko."
+ },
+ {
+  "id": "tkp-005",
+  "sub": "TKP",
+  "topic": "Profesionalisme",
+  "diag": 22,
+  "fam": "K",
+  "status": "draf",
+  "source": "orisinal",
+  "q": "Anda menemukan kesalahan angka pada laporan yang sudah dikirim ke pimpinan. Belum ada yang menyadarinya. Sikap Anda ....",
+  "o": [
+   "Segera melapor kepada atasan, menyampaikan koreksi dan dampaknya, lalu mengirim versi perbaikan",
+   "Menyalahkan sumber data karena menyebabkan kesalahan",
+   "Memperbaiki dan mengirim revisi kepada pimpinan lebih dulu agar kesalahan tidak berlanjut, lalu memberi tahu atasan setelahnya",
+   "Menunggu apakah ada pihak yang menanyakan angka tersebut",
+   "Memperbaiki arsip internal agar laporan berikutnya benar"
+  ],
+  "s": [
+   5,
+   1,
+   4,
+   2,
+   3
+  ],
+  "core": "Nilai yang diuji: profesionalisme, yaitu akuntabilitas dan transparansi.",
+  "kon": [
+   "Kesalahan yang diketahui harus segera dilaporkan, walau belum ada yang sadar.",
+   "Pimpinan perlu tahu dampaknya agar bisa mengambil keputusan yang benar.",
+   "Memperbaiki saja tanpa melapor menunda transparansi."
+  ],
+  "opt": [
+   "Bertanggung jawab, transparan, dan segera memperbaiki dengan menilai dampak.",
+   "Menyalahkan pihak lain adalah bentuk menghindari tanggung jawab.",
+   "Hampir sempurna, tetapi atasan baru tahu belakangan. Urutannya keliru.",
+   "Menunggu berarti membiarkan kesalahan beredar.",
+   "Memperbaiki arsip tidak menangani laporan yang sudah terkirim."
+  ],
+  "fast": [
+   "Urutan: lapor, jelaskan dampak, perbaiki.",
+   "Coret opsi yang menyalahkan atau menunggu.",
+   "Bandingkan dua opsi terbaik dari sisi urutan: transparansi dulu atau perbaikan dulu?"
+  ],
+  "mn": "Lapor dulu, perbaiki kemudian.",
+  "trap": "Opsi C hampir sempurna. Pembedanya adalah urutan: melapor lebih dulu, bukan merevisi lebih dulu."
+ },
+ {
+  "id": "tkp-006",
+  "sub": "TKP",
+  "topic": "Anti radikalisme",
+  "diag": 23,
+  "fam": "K",
+  "status": "draf",
+  "source": "orisinal",
+  "q": "Di grup WhatsApp kantor, seorang rekan membagikan pesan yang menghasut kebencian terhadap kelompok agama tertentu dan mengajak menolak kebijakan pemerintah dengan cara anarkis. Sikap Anda ....",
+  "o": [
+   "Keluar dari grup dan tidak berkomentar",
+   "Tidak menyebarkan pesan itu, menegur rekan secara pribadi agar berhenti membagikannya, dan melapor kepada atasan atau pihak berwenang bila berlanjut",
+   "Meneruskan pesan ke grup lain untuk meminta pendapat",
+   "Mengabaikan karena dianggap urusan pribadi rekan",
+   "Mengingatkan di grup bahwa konten tersebut tidak sejalan dengan nilai ASN"
+  ],
+  "s": [
+   3,
+   5,
+   1,
+   2,
+   4
+  ],
+  "core": "Nilai yang diuji: anti radikalisme dan pembinaan sesama ASN.",
+  "kon": [
+   "ASN wajib menjaga Pancasila dan kebinekaan. Ujaran kebencian bertentangan dengan itu.",
+   "Langkah bertahap: jangan ikut menyebarkan, tegur secara pribadi, lapor bila berlanjut.",
+   "Menegur pribadi menjaga martabat rekan sambil tetap tegas pada isi pesan."
+  ],
+  "opt": [
+   "Menghindar. Masalahnya tidak ditangani.",
+   "Bertahap dan beradab: tegas pada isi, menghargai pribadi, ada eskalasi.",
+   "Ikut menyebarkan ujaran kebencian, sangat tidak tepat.",
+   "Membiarkan sama dengan menyetujui secara diam-diam.",
+   "Tegas, tetapi menegur di depan umum dapat mempermalukan rekan dan memicu debat."
+  ],
+  "fast": [
+   "Pegang pola: jangan sebar, tegur pribadi, lapor bila lanjut.",
+   "Coret opsi yang ikut menyebarkan atau membiarkan.",
+   "Bandingkan 'tegur pribadi' dengan 'tegur di grup': yang pribadi lebih tepat lebih dulu."
+  ],
+  "mn": "Tegur dengan hormat, tegas pada isi, lapor bila berlanjut.",
+  "trap": "Opsi E tampak berani dan tegas, tetapi menegur di depan banyak orang bukan langkah pertama yang terbaik."
+ },
+ {
+  "id": "tkp-007",
+  "sub": "TKP",
+  "topic": "Pelayanan publik: inisiatif",
+  "diag": 24,
+  "fam": "K",
+  "status": "draf",
+  "source": "orisinal",
+  "q": "Aplikasi layanan di unit Anda sering error pada jam sibuk dan Anda berulang kali menerima keluhan pengguna. Sikap Anda ....",
+  "o": [
+   "Menyampaikan bahwa masalah itu bukan wewenang unit Anda",
+   "Meminta pengguna mencoba lagi di jam sepi",
+   "Mencatat pola keluhan (jam dan jenis error), melaporkan ke tim TI disertai usulan perbaikan, dan menyediakan layanan alternatif sementara",
+   "Menghindari pengguna yang mengeluh",
+   "Melaporkan ke tim TI setiap ada keluhan masuk, lengkap dengan tangkapan layar dan waktu kejadian dari pengguna"
+  ],
+  "s": [
+   2,
+   3,
+   5,
+   1,
+   4
+  ],
+  "core": "Nilai yang diuji: pelayanan publik, khususnya inisiatif memperbaiki layanan.",
+  "kon": [
+   "Keluhan berulang adalah data untuk memperbaiki sistem.",
+   "Pola (jam dan jenis error) membuat tim TI bekerja lebih efektif.",
+   "Layanan alternatif sementara menjaga pengguna tetap terlayani."
+  ],
+  "opt": [
+   "Melempar tanggung jawab tidak menyelesaikan keluhan pengguna.",
+   "Menyarankan jam sepi hanya menghindari masalah.",
+   "Proaktif dengan data, mengusulkan solusi, dan menjaga layanan tetap berjalan.",
+   "Menghindar dari pengguna bertentangan dengan semangat melayani.",
+   "Baik karena melapor, tetapi satu per satu tanpa pola dan tanpa solusi sementara."
+  ],
+  "fast": [
+   "Cari opsi yang memadukan data, usulan solusi, dan layanan sementara.",
+   "Coret opsi yang menghindar atau melempar.",
+   "Bandingkan 'melapor tiap keluhan' dengan 'melapor pola': pola lebih bernilai."
+  ],
+  "mn": "Catat pola, usul solusi, jaga layanan.",
+  "trap": "Opsi E sudah baik, tetapi hanya meneruskan keluhan. Skor 5 mengolahnya menjadi pola dan solusi."
+ },
+ {
+  "id": "tkp-008",
+  "sub": "TKP",
+  "topic": "Jejaring kerja: kerja tim",
+  "diag": 25,
+  "fam": "K",
+  "status": "draf",
+  "source": "orisinal",
+  "q": "Dua rekan satu tim berselisih soal pembagian tugas sehingga proyek tertunda. Anda bukan ketua tim. Sikap Anda ....",
+  "o": [
+   "Membicarakan perselisihan itu di luar tim",
+   "Memihak rekan yang lebih dekat dengan Anda",
+   "Mengerjakan bagian sendiri dengan baik dan tidak ikut campur",
+   "Melaporkan ke ketua tim dan menyerahkan penyelesaian kepadanya",
+   "Mengajak keduanya berdiskusi berdasarkan tujuan tim, menawarkan usulan pembagian tugas, dan melibatkan ketua tim bila belum ada titik temu"
+  ],
+  "s": [
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "core": "Nilai yang diuji: jejaring kerja, yaitu kerja tim dan penyelesaian konflik.",
+  "kon": [
+   "Konflik diselesaikan dengan menyatukan kembali tujuan tim.",
+   "Menawarkan usulan membantu kedua pihak keluar dari kebuntuan.",
+   "Ketua tim dilibatkan sebagai langkah lanjutan, bukan satu-satunya langkah."
+  ],
+  "opt": [
+   "Menggunjing di luar tim merusak kepercayaan dan tidak menyelesaikan masalah.",
+   "Memihak memperdalam perselisihan.",
+   "Aman tetapi pasif. Proyek tetap tertunda.",
+   "Melaporkan itu benar, tetapi menyerahkan semuanya tanpa berusaha membantu.",
+   "Mediasi berbasis tujuan tim, ada usulan, dan eskalasi bila perlu."
+  ],
+  "fast": [
+   "Urutan: satukan tujuan, usulkan solusi, libatkan ketua bila perlu.",
+   "Coret opsi yang menggunjing atau memihak.",
+   "Bandingkan opsi pasif, opsi lapor, dan opsi mediasi: mediasi paling lengkap."
+  ],
+  "mn": "Satukan tujuan, tawarkan solusi, libatkan ketua.",
+  "trap": "Opsi D masih terasa 'prosedural dan aman'. Skor 5 menuntut kamu ikut berkontribusi menyelesaikan."
+ }
+]

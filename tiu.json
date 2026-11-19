@@ -1,0 +1,345 @@
+[
+ {
+  "id": "tiu-001",
+  "sub": "TIU",
+  "topic": "Verbal: analogi",
+  "diag": 9,
+  "fam": "L",
+  "status": "draf",
+  "source": "orisinal",
+  "q": "BAROMETER : TEKANAN UDARA = ODOMETER : ....",
+  "o": [
+   "Kecepatan",
+   "Bahan bakar",
+   "Jarak tempuh",
+   "Mesin",
+   "Roda"
+  ],
+  "k": "C",
+  "core": "Yang ditanya: pasangan dengan relasi yang sama, yaitu alat ukur dan hal yang diukur.",
+  "kon": [
+   "Barometer mengukur tekanan udara.",
+   "Odometer mengukur jarak tempuh kendaraan.",
+   "Speedometer-lah yang mengukur kecepatan, bukan odometer."
+  ],
+  "opt": [
+   "Kecepatan diukur speedometer, bukan odometer. Ini pengecoh.",
+   "Bahan bakar diukur indikator bahan bakar.",
+   "Benar. Odometer = alat ukur jarak tempuh.",
+   "Mesin adalah komponen, bukan hal yang diukur.",
+   "Roda adalah komponen, bukan hal yang diukur."
+  ],
+  "fast": [
+   "Ubah jadi kalimat: 'X adalah alat untuk mengukur Y'.",
+   "Pakai kalimat yang sama untuk pasangan kedua.",
+   "Coret opsi yang berupa benda atau komponen, bukan besaran."
+  ],
+  "mn": "Barometer: tekanan. Termometer: suhu. Odometer: jarak. Speedometer: kecepatan.",
+  "trap": "Kita sering menukar odometer dengan speedometer. Itulah sebabnya 'kecepatan' dipasang sebagai pengecoh."
+ },
+ {
+  "id": "tiu-002",
+  "sub": "TIU",
+  "topic": "Verbal: silogisme",
+  "diag": 10,
+  "fam": "L",
+  "status": "draf",
+  "source": "orisinal",
+  "q": "Premis 1: Semua peserta yang lolos SKD mengikuti SKB.\nPremis 2: Rani tidak mengikuti SKB.\nKesimpulan yang pasti benar adalah ....",
+  "o": [
+   "Rani gagal pada SKB",
+   "Rani lolos SKD tetapi tidak ikut SKB",
+   "Rani mengikuti SKD",
+   "Rani tidak lolos SKD",
+   "Tidak dapat ditarik kesimpulan"
+  ],
+  "k": "D",
+  "core": "Yang ditanya: kesimpulan yang PASTI benar dari dua premis.",
+  "kon": [
+   "Premis 1: kalau lolos SKD, pasti ikut SKB.",
+   "Premis 2: Rani tidak ikut SKB.",
+   "Jika Rani lolos SKD, ia pasti ikut SKB. Karena ia tidak ikut, ia tidak mungkin lolos SKD. Pola ini disebut kontrapositif."
+  ],
+  "opt": [
+   "Tidak ikut SKB berbeda dengan gagal di SKB. Tidak bisa disimpulkan.",
+   "Bertentangan dengan Premis 1: yang lolos SKD pasti ikut SKB.",
+   "Premis tidak memberi informasi apakah Rani mengikuti SKD.",
+   "Benar. Kontrapositif dari Premis 1.",
+   "Salah. Kesimpulan bisa ditarik: Rani tidak lolos SKD."
+  ],
+  "fast": [
+   "Gambar lingkaran 'lolos SKD' di dalam lingkaran 'ikut SKB'.",
+   "Rani di luar lingkaran besar, berarti juga di luar lingkaran kecil.",
+   "Pola: Semua A adalah B; X bukan B, maka X bukan A."
+  ],
+  "mn": "Kalau hujan, tanah basah. Tanah kering berarti tidak hujan.",
+  "trap": "'Tidak dapat ditarik kesimpulan' menggoda karena terkesan aman, padahal di sini kesimpulannya jelas."
+ },
+ {
+  "id": "tiu-003",
+  "sub": "TIU",
+  "topic": "Verbal: penalaran teks",
+  "diag": 11,
+  "fam": "L",
+  "status": "draf",
+  "source": "orisinal",
+  "q": "Pemerintah Kota X menaikkan tarif parkir dua kali lipat agar pengendara beralih ke angkutan umum. Enam bulan kemudian, jumlah penumpang angkutan umum tidak berubah, sedangkan pendapatan dari parkir meningkat.\nKesimpulan yang paling kuat didukung oleh paragraf tersebut adalah ....",
+  "o": [
+   "Kebijakan itu gagal total dan merugikan pemerintah kota",
+   "Warga berhenti memakai kendaraan pribadi",
+   "Angkutan umum tidak dibutuhkan warga",
+   "Pendapatan parkir naik karena jumlah kendaraan bertambah",
+   "Kebijakan belum mencapai tujuannya, tetapi menambah pendapatan parkir"
+  ],
+  "k": "E",
+  "core": "Yang ditanya: kesimpulan yang paling kuat ditunjang teks, tanpa tambahan klaim.",
+  "kon": [
+   "Tujuan kebijakan: pengendara beralih ke angkutan umum.",
+   "Data 1: penumpang angkutan umum tetap, jadi tujuan belum tercapai.",
+   "Data 2: pendapatan parkir naik, jadi ada dampak sampingan yang menguntungkan.",
+   "Kesimpulan yang kuat menggabungkan kedua data itu dan tidak menambah klaim baru."
+  ],
+  "opt": [
+   "'Gagal total' dan 'merugikan' melampaui teks. Pendapatan malah naik.",
+   "Teks tidak menyebut warga berhenti memakai kendaraan pribadi.",
+   "Teks tidak mengatakan angkutan umum tidak dibutuhkan.",
+   "Penyebab 'kendaraan bertambah' tidak ada di teks. Itu tebakan.",
+   "Benar. Tujuan belum tercapai, tetapi pendapatan parkir naik."
+  ],
+  "fast": [
+   "Tandai tujuan dan data di teks.",
+   "Uji tiap opsi: bisa ditunjuk ke kalimat teks atau tidak?",
+   "Coret kata mutlak: gagal total, berhenti, tidak dibutuhkan."
+  ],
+  "mn": "Kesimpulan harus punya 'alamat' di teks. Tidak ada alamat, coret.",
+  "trap": "Opsi D terdengar masuk akal, tetapi penyebabnya tidak ada di teks. Jangan memakai pengetahuan di luar teks."
+ },
+ {
+  "id": "tiu-004",
+  "sub": "TIU",
+  "topic": "Numerik: persentase",
+  "diag": 12,
+  "fam": "H",
+  "status": "draf",
+  "source": "orisinal",
+  "q": "Harga sebuah barang dinaikkan 20%, kemudian diberi diskon 25% dari harga setelah kenaikan. Dibandingkan harga awal, harga akhirnya ....",
+  "o": [
+   "turun 15%",
+   "turun 10%",
+   "turun 5%",
+   "tetap sama",
+   "naik 5%"
+  ],
+  "k": "B",
+  "core": "Yang ditanya: perubahan bersih setelah naik 20% lalu diskon 25%.",
+  "kon": [
+   "Naik 20% berarti dikali 1,20. Diskon 25% berarti dikali 0,75.",
+   "Persen berurutan dikalikan, bukan dijumlahkan: 1,20 x 0,75 = 0,90.",
+   "0,90 berarti harga akhir 90% dari harga awal, yaitu turun 10%."
+  ],
+  "opt": [
+   "Faktor akhirnya 0,90, bukan 0,85.",
+   "Benar. Faktor 0,90 berarti turun 10%.",
+   "Ini hasil menjumlah (20 - 25 = -5). Jebakan klasik.",
+   "Akan benar hanya jika diskonnya sekitar 16,7%, bukan 25%.",
+   "Harga tidak mungkin naik: diskon 25% dihitung dari harga yang sudah naik, jadi lebih besar dari kenaikannya."
+  ],
+  "fast": [
+   "Anggap harga awal 100. Naik 20% menjadi 120.",
+   "Diskon 25% dari 120 = 30, jadi sisa 90.",
+   "90 dibanding 100 berarti turun 10%. Angka 100 menghemat waktu."
+  ],
+  "mn": "Persen berurutan: kali, jangan tambah.",
+  "trap": "Menjumlah persen (20 - 25) menghasilkan 'turun 5%', pengecoh yang paling umum."
+ },
+ {
+  "id": "tiu-005",
+  "sub": "TIU",
+  "topic": "Numerik: soal cerita (pekerjaan)",
+  "diag": 13,
+  "fam": "H",
+  "status": "draf",
+  "source": "orisinal",
+  "q": "Andi dapat menyelesaikan suatu pekerjaan dalam 12 hari, Budi dalam 18 hari. Keduanya bekerja bersama selama 4 hari, kemudian Andi berhenti. Sisa pekerjaan diselesaikan Budi sendirian dalam ... hari.",
+  "o": [
+   "6",
+   "7",
+   "8",
+   "9",
+   "10"
+  ],
+  "k": "C",
+  "core": "Yang ditanya: lama Budi menyelesaikan sisa pekerjaan setelah 4 hari bekerja bersama.",
+  "kon": [
+   "Anggap pekerjaan 36 satuan (KPK dari 12 dan 18), supaya tidak berurusan dengan pecahan.",
+   "Laju Andi 36/12 = 3 satuan per hari. Laju Budi 36/18 = 2 satuan per hari.",
+   "Berdua 5 satuan per hari selama 4 hari = 20. Sisa 36 - 20 = 16. Budi 2 per hari, jadi 16/2 = 8 hari."
+  ],
+  "opt": [
+   "6 hari x 2 = 12, masih kurang dari 16.",
+   "7 hari x 2 = 14, masih kurang 2.",
+   "Benar. 8 hari x 2 = 16.",
+   "9 hari x 2 = 18, melebihi sisa.",
+   "10 hari x 2 = 20, melebihi sisa."
+  ],
+  "fast": [
+   "Ganti pekerjaan dengan KPK waktu: 36.",
+   "Hitung laju tiap orang sebagai bilangan bulat.",
+   "Hitung kerja bersama, kurangi dari total, bagi dengan laju yang tersisa."
+  ],
+  "mn": "KPK dulu, pecahan hilang.",
+  "trap": "Salah jika mengira Andi masih bekerja, atau memakai 1/12 + 1/18 tanpa KPK lalu keliru menghitung sisa."
+ },
+ {
+  "id": "tiu-006",
+  "sub": "TIU",
+  "topic": "Numerik: deret",
+  "diag": 14,
+  "fam": "H",
+  "status": "draf",
+  "source": "orisinal",
+  "q": "3, 4, 8, 17, 33, 58, ....",
+  "o": [
+   "84",
+   "88",
+   "90",
+   "94",
+   "96"
+  ],
+  "k": "D",
+  "core": "Yang ditanya: suku berikutnya dari deret 3, 4, 8, 17, 33, 58.",
+  "kon": [
+   "Naiknya tidak seragam, jadi hitung selisih antarsuku: 1, 4, 9, 16, 25.",
+   "Selisih itu adalah bilangan kuadrat: 1, 2, 3, 4, 5 dikuadratkan.",
+   "Selisih berikutnya 6 kuadrat = 36, maka 58 + 36 = 94."
+  ],
+  "opt": [
+   "84 berarti menambah 26. Itu bukan bilangan kuadrat.",
+   "88 berarti menambah 30. Itu bukan bilangan kuadrat.",
+   "90 berarti menambah 32. Itu bukan bilangan kuadrat.",
+   "Benar. Menambah 36 (6 kuadrat).",
+   "96 berarti menambah 38. Itu bukan bilangan kuadrat."
+  ],
+  "fast": [
+   "Naik tidak beraturan? Hitung selisihnya.",
+   "Selisih belum berpola? Cek apakah kuadrat, kubik, atau berlipat.",
+   "Hafal: 1, 4, 9, 16, 25, 36, 49."
+  ],
+  "mn": "Kuadrat adalah sahabat deret: 1, 4, 9, 16, 25, 36.",
+  "trap": "Mudah terjebak mencari pola jumlah dua suku sebelumnya. Cek selisih terlebih dahulu."
+ },
+ {
+  "id": "tiu-007",
+  "sub": "TIU",
+  "topic": "Numerik: rata-rata",
+  "diag": 15,
+  "fam": "H",
+  "status": "draf",
+  "source": "orisinal",
+  "q": "Rata-rata nilai 5 peserta pelatihan adalah 78. Jika seorang peserta bernilai 58 dikeluarkan dari perhitungan, rata-rata nilai peserta yang tersisa menjadi ....",
+  "o": [
+   "82",
+   "83",
+   "84",
+   "85",
+   "86"
+  ],
+  "k": "B",
+  "core": "Yang ditanya: rata-rata baru setelah satu nilai dikeluarkan.",
+  "kon": [
+   "Rata-rata dikali banyak data sama dengan total: 78 x 5 = 390.",
+   "Keluarkan 58, totalnya menjadi 332, dengan 4 peserta tersisa.",
+   "Rata-rata baru = 332 / 4 = 83."
+  ],
+  "opt": [
+   "332 dibagi 4 adalah 83, bukan 82.",
+   "Benar. 332 / 4 = 83.",
+   "332 dibagi 4 adalah 83, bukan 84.",
+   "332 dibagi 4 adalah 83, bukan 85.",
+   "332 dibagi 4 adalah 83, bukan 86."
+  ],
+  "fast": [
+   "Rata-rata selalu lewat total.",
+   "Total lama dikurangi nilai yang keluar, itu total baru.",
+   "Bagi dengan jumlah data yang baru."
+  ],
+  "mn": "Rata-rata, ubah ke total, ubah lagi ke rata-rata.",
+  "trap": "Salah jika langsung 78 dikurangi 58, atau masih membagi dengan 5."
+ },
+ {
+  "id": "tiu-008",
+  "sub": "TIU",
+  "topic": "Logika analitis: urutan posisi",
+  "diag": 16,
+  "fam": "L",
+  "status": "draf",
+  "source": "orisinal",
+  "q": "Lima pegawai (P, Q, R, S, T) duduk berjajar dari kiri ke kanan pada posisi 1 sampai 5.\n- R duduk di ujung kiri dan P di ujung kanan.\n- T duduk tepat di sebelah kanan Q.\n- S tidak duduk bersebelahan dengan R.\nPegawai yang duduk di posisi tengah (posisi 3) adalah ....",
+  "o": [
+   "T",
+   "Q",
+   "R",
+   "S",
+   "P"
+  ],
+  "k": "A",
+  "core": "Yang ditanya: siapa yang duduk di posisi 3 setelah semua syarat dipenuhi.",
+  "kon": [
+   "Isi yang pasti dulu: R di posisi 1, P di posisi 5.",
+   "Q dan T berdampingan dengan T di kanan Q. Pasangan itu hanya muat di posisi (2,3) atau (3,4).",
+   "Jika (3,4), S tersisa di posisi 2 dan bersebelahan dengan R (dilarang). Jadi Q-T di (2,3) dan S di 4. Urutan akhir: R, Q, T, S, P."
+  ],
+  "opt": [
+   "Benar. T berada di posisi 3.",
+   "Q berada di posisi 2, bukan 3.",
+   "R berada di posisi 1, bukan 3.",
+   "S berada di posisi 4, bukan 3.",
+   "P berada di posisi 5, bukan 3."
+  ],
+  "fast": [
+   "Gambar lima kotak bernomor.",
+   "Isi yang pasti (ujung-ujung), lalu uji kemungkinan pasangan.",
+   "Jika satu skenario melanggar syarat, skenario lainnya pasti benar."
+  ],
+  "mn": "R - Q - T - S - P, dibaca dari kiri.",
+  "trap": "Setiap opsi adalah orang yang memang ada di barisan, tetapi di posisi lain. Pastikan posisinya, bukan sekadar namanya."
+ },
+ {
+  "id": "tiu-009",
+  "sub": "TIU",
+  "topic": "Numerik: kecepatan rata-rata",
+  "diag": 17,
+  "fam": "H",
+  "status": "draf",
+  "source": "orisinal",
+  "q": "Seorang kurir menempuh rute pergi dengan kecepatan rata-rata 60 km/jam dan kembali lewat rute yang sama dengan kecepatan rata-rata 40 km/jam. Kecepatan rata-rata untuk seluruh perjalanan pergi-pulang adalah ... km/jam.",
+  "o": [
+   "45",
+   "46",
+   "48",
+   "50",
+   "52"
+  ],
+  "k": "C",
+  "core": "Yang ditanya: kecepatan rata-rata seluruh perjalanan pergi-pulang pada jarak yang sama.",
+  "kon": [
+   "Kecepatan rata-rata = total jarak dibagi total waktu, bukan rata-rata dua kecepatan.",
+   "Misalkan satu arah 120 km: pergi 120/60 = 2 jam, pulang 120/40 = 3 jam.",
+   "Total 240 km dalam 5 jam = 48 km/jam. Rumus cepatnya: 2ab / (a + b)."
+  ],
+  "opt": [
+   "45 tidak sesuai: 240 km dibagi 5 jam adalah 48.",
+   "46 tidak sesuai: 240 km dibagi 5 jam adalah 48.",
+   "Benar. 240 km / 5 jam = 48 km/jam.",
+   "50 adalah rata-rata biasa (60 + 40) / 2. Ini mengabaikan bahwa waktu di kecepatan rendah lebih lama.",
+   "52 tidak sesuai: 240 km dibagi 5 jam adalah 48."
+  ],
+  "fast": [
+   "Pilih jarak yang habis dibagi 60 dan 40, misalnya 120 km.",
+   "Hitung total jarak dan total waktu.",
+   "Atau langsung pakai 2ab / (a + b) untuk jarak sama."
+  ],
+  "mn": "Jarak sama, kecepatan beda: pakai harmonik, bukan rata-rata biasa.",
+  "trap": "Angka 50 terasa alami karena merupakan 'tengah-tengah', tetapi itu jebakan."
+ }
+]
